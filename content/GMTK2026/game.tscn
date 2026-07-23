@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://cusxtphoogycf"]
+
+[ext_resource type="Script" uid="uid://di0461riufsmq" path="res://content/GMTK2026/player.gd" id="2_hap7t"]
+[ext_resource type="Texture2D" uid="uid://cxvibdapcjnxc" path="res://content/Kenney/kenney_space-shooter-remastered/PNG/playerShip2_green.png" id="2_ou2lx"]
+[ext_resource type="Texture2D" uid="uid://4g7rw5if5dd5" path="res://content/Kenney/kenney_space-shooter-remastered/PNG/Meteors/meteorBrown_big1.png" id="2_p7irm"]
+[ext_resource type="Texture2D" uid="uid://cw7fmxi78snk7" path="res://content/GMTK2026/starfield.png" id="2_qmd8u"]
+[ext_resource type="Texture2D" uid="uid://dp3sm2t7r2tng" path="res://content/Kenney/kenney_particle-pack/PNG (Transparent)/star_04.png" id="3_qmd8u"]
+[ext_resource type="PackedScene" uid="uid://cbg0xwvkai56i" path="res://content/GMTK2026/enemy_a.tscn" id="3_u0ef4"]
+[ext_resource type="PackedScene" uid="uid://7arbusl5a4df" path="res://content/GMTK2026/enemy_b.tscn" id="4_6d6ul"]
+[ext_resource type="Texture2D" uid="uid://d1d3q3n57vgca" path="res://content/GiantLightStudios_SimpleShapes/circle_outline_eighth_128.png" id="4_hxwgx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p7irm"]
+radius = 88.02273
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dhrd0"]
+radius = 38.052597
+
+[sub_resource type="Curve" id="Curve_qmd8u"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.3717256, 0.0, 0, 0]
+point_count = 2
+
+[node name="Game" type="Node" unique_id=159096374]
+
+[node name="World" type="Node2D" parent="." unique_id=792346425]
+
+[node name="LevelRoot" type="Node2D" parent="World" unique_id=1383105338]
+
+[node name="BackgroundStars" type="Node2D" parent="World/LevelRoot" unique_id=364782741]
+modulate = Color(1, 1, 1, 0.18039216)
+
+[node name="Parallax2DNear" type="Parallax2D" parent="World/LevelRoot/BackgroundStars" unique_id=1068972584]
+visible = false
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(1024, 1024)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="World/LevelRoot/BackgroundStars/Parallax2DNear" unique_id=400354135]
+texture = ExtResource("2_qmd8u")
+centered = false
+
+[node name="Parallax2DFar" type="Parallax2D" parent="World/LevelRoot/BackgroundStars" unique_id=420107279]
+visible = false
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(1024, 1024)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="World/LevelRoot/BackgroundStars/Parallax2DFar" unique_id=1331709227]
+texture = ExtResource("2_qmd8u")
+centered = false
+
+[node name="Parallax2DFixed" type="Parallax2D" parent="World/LevelRoot/BackgroundStars" unique_id=1064193844]
+repeat_size = Vector2(1024, 1024)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="World/LevelRoot/BackgroundStars/Parallax2DFixed" unique_id=1676100570]
+texture = ExtResource("2_qmd8u")
+centered = false
+
+[node name="Meteors" type="Node2D" parent="World/LevelRoot" unique_id=491909470]
+
+[node name="Meteor" type="RigidBody2D" parent="World/LevelRoot/Meteors" unique_id=1982409532]
+position = Vector2(744, 403)
+mass = 10.0
+gravity_scale = 0.0
+inertia = 50000.0
+linear_damp = 2.0
+angular_damp = 2.0
+constant_force = Vector2(100, 40)
+constant_torque = 10000.0
+
+[node name="Sprite2D" type="Sprite2D" parent="World/LevelRoot/Meteors/Meteor" unique_id=663756941]
+scale = Vector2(2, 2)
+texture = ExtResource("2_p7irm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/LevelRoot/Meteors/Meteor" unique_id=904289995]
+shape = SubResource("CircleShape2D_p7irm")
+
+[node name="Enemies" type="Node2D" parent="World/LevelRoot" unique_id=1446069090]
+
+[node name="EnemyA" parent="World/LevelRoot/Enemies" unique_id=920603194 instance=ExtResource("3_u0ef4")]
+position = Vector2(1178, 535)
+
+[node name="EnemyB" parent="World/LevelRoot/Enemies" unique_id=637357591 instance=ExtResource("4_6d6ul")]
+position = Vector2(1178, 856)
+
+[node name="PlayerStart" type="Node2D" parent="World" unique_id=1920689040]
+position = Vector2(960, 540)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="World/PlayerStart" unique_id=824116094]
+motion_mode = 1
+script = ExtResource("2_hap7t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/PlayerStart/CharacterBody2D" unique_id=876850528]
+shape = SubResource("CircleShape2D_dhrd0")
+
+[node name="ChargeProgressBar" type="TextureProgressBar" parent="World/PlayerStart/CharacterBody2D" unique_id=2046047156]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+fill_mode = 8
+radial_initial_angle = 180.0
+texture_progress = ExtResource("4_hxwgx")
+
+[node name="VisualPivot" type="Node2D" parent="World/PlayerStart/CharacterBody2D" unique_id=1868258063]
+
+[node name="ThusterParticles" type="CPUParticles2D" parent="World/PlayerStart/CharacterBody2D/VisualPivot" unique_id=2119709406]
+position = Vector2(-25, 0)
+amount = 24
+texture = ExtResource("3_qmd8u")
+draw_order = 1
+direction = Vector2(-1, 0)
+spread = 30.065
+gravity = Vector2(0, 0)
+initial_velocity_min = 68.97
+initial_velocity_max = 68.97
+angular_velocity_min = -90.000015
+angular_velocity_max = 89.999985
+scale_amount_min = 0.099999994
+scale_amount_max = 0.19999999
+scale_amount_curve = SubResource("Curve_qmd8u")
+
+[node name="BoostParticles" type="CPUParticles2D" parent="World/PlayerStart/CharacterBody2D/VisualPivot" unique_id=2005561665]
+position = Vector2(-25, 0)
+emitting = false
+amount = 24
+texture = ExtResource("3_qmd8u")
+one_shot = true
+explosiveness = 1.0
+draw_order = 1
+direction = Vector2(-1, 0)
+spread = 30.065
+gravity = Vector2(0, 0)
+initial_velocity_min = 378.6
+initial_velocity_max = 487.39
+angular_velocity_min = -90.000015
+angular_velocity_max = 89.999985
+scale_amount_min = 0.099999994
+scale_amount_max = 0.19999999
+scale_amount_curve = SubResource("Curve_qmd8u")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/PlayerStart/CharacterBody2D/VisualPivot" unique_id=569331290]
+rotation = 1.5707964
+texture = ExtResource("2_ou2lx")
+
+[node name="Camera2D" type="Camera2D" parent="World/PlayerStart/CharacterBody2D" unique_id=319467351]
+process_callback = 0
+position_smoothing_enabled = true

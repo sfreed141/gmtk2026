@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://cbg0xwvkai56i"]
+
+[ext_resource type="Script" uid="uid://cwa62mqm4wtfa" path="res://content/GMTK2026/enemy.gd" id="1_3etdh"]
+[ext_resource type="Texture2D" uid="uid://c83eayomsthlv" path="res://content/Kenney/kenney_space-shooter-remastered/PNG/Enemies/enemyRed4.png" id="1_rij3f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2uyj2"]
+radius = 90.13878
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3etdh"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.73333335, 0.42352942, 0.18039216, 1)
+
+[node name="EnemyA" type="RigidBody2D" unique_id=920603194]
+mass = 10.0
+gravity_scale = 0.0
+linear_damp = 2.0
+script = ExtResource("1_3etdh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=46363109]
+shape = SubResource("CircleShape2D_2uyj2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=252897917]
+scale = Vector2(2, 2)
+texture = ExtResource("1_rij3f")
+
+[node name="SplitTimer" type="Timer" parent="." unique_id=616009549]
+
+[node name="UI" type="Node2D" parent="." unique_id=1031001739]
+
+[node name="Label" type="Label" parent="UI" unique_id=1916375983]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = -141.0
+offset_right = 20.0
+offset_bottom = -118.0
+grow_horizontal = 2
+text = "8"
+horizontal_alignment = 1
+
+[node name="HpBar" type="ProgressBar" parent="UI" unique_id=137054801]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 104.0
+offset_right = 50.0
+offset_bottom = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_3etdh")
+max_value = 3.0
+step = 1.0
+value = 1.0
+show_percentage = false
