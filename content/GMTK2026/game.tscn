@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cbg0xwvkai56i" path="res://content/GMTK2026/enemy_a.tscn" id="3_u0ef4"]
 [ext_resource type="PackedScene" uid="uid://7arbusl5a4df" path="res://content/GMTK2026/enemy_b.tscn" id="4_6d6ul"]
 [ext_resource type="Texture2D" uid="uid://d1d3q3n57vgca" path="res://content/GiantLightStudios_SimpleShapes/circle_outline_eighth_128.png" id="4_hxwgx"]
+[ext_resource type="Script" uid="uid://ddont5wjdxry5" path="res://content/GMTK2026/Components/screen_wrap.gd" id="4_phyrh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p7irm"]
 radius = 88.02273
@@ -22,6 +23,11 @@ point_count = 2
 [node name="Game" type="Node" unique_id=159096374]
 
 [node name="World" type="Node2D" parent="." unique_id=792346425]
+
+[node name="Camera2D" type="Camera2D" parent="World" unique_id=319467351]
+position = Vector2(960, 540)
+process_callback = 0
+position_smoothing_enabled = true
 
 [node name="LevelRoot" type="Node2D" parent="World" unique_id=1383105338]
 
@@ -75,13 +81,25 @@ texture = ExtResource("2_p7irm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/LevelRoot/Meteors/Meteor" unique_id=904289995]
 shape = SubResource("CircleShape2D_p7irm")
 
+[node name="ScreenWrap" type="Node" parent="World/LevelRoot/Meteors/Meteor" unique_id=383732987]
+script = ExtResource("4_phyrh")
+metadata/_custom_type_script = "uid://ddont5wjdxry5"
+
 [node name="Enemies" type="Node2D" parent="World/LevelRoot" unique_id=1446069090]
 
 [node name="EnemyA" parent="World/LevelRoot/Enemies" unique_id=920603194 instance=ExtResource("3_u0ef4")]
 position = Vector2(1178, 535)
 
+[node name="ScreenWrap" type="Node" parent="World/LevelRoot/Enemies/EnemyA" unique_id=2043532830]
+script = ExtResource("4_phyrh")
+metadata/_custom_type_script = "uid://ddont5wjdxry5"
+
 [node name="EnemyB" parent="World/LevelRoot/Enemies" unique_id=637357591 instance=ExtResource("4_6d6ul")]
 position = Vector2(1178, 856)
+
+[node name="ScreenWrap" type="Node" parent="World/LevelRoot/Enemies/EnemyB" unique_id=462256682]
+script = ExtResource("4_phyrh")
+metadata/_custom_type_script = "uid://ddont5wjdxry5"
 
 [node name="PlayerStart" type="Node2D" parent="World" unique_id=1920689040]
 position = Vector2(960, 540)
@@ -151,6 +169,6 @@ scale_amount_curve = SubResource("Curve_qmd8u")
 rotation = 1.5707964
 texture = ExtResource("2_ou2lx")
 
-[node name="Camera2D" type="Camera2D" parent="World/PlayerStart/CharacterBody2D" unique_id=319467351]
-process_callback = 0
-position_smoothing_enabled = true
+[node name="ScreenWrap" type="Node" parent="World/PlayerStart/CharacterBody2D" unique_id=146111311]
+script = ExtResource("4_phyrh")
+metadata/_custom_type_script = "uid://ddont5wjdxry5"
