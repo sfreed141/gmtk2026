@@ -124,5 +124,6 @@ layout_mode = 2
 text = "Quit to Main Menu"
 
 [connection signal="game_over" from="World/GameState" to="." method="_on_game_state_game_over"]
+[connection signal="defeated" from="World/PlayerStart/Player" to="World/GameState" method="_on_player_defeated"]
 [connection signal="pressed" from="CanvasLayer/GameOverOverlay/Panel/CenterContainer/VBoxContainer/GameOverRestartButton" to="." method="_on_game_over_restart_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GameOverOverlay/Panel/CenterContainer/VBoxContainer/GameOverQuitButton" to="." method="_on_game_over_quit_button_pressed"]

@@ -3,10 +3,14 @@
 [ext_resource type="Script" uid="uid://cwa62mqm4wtfa" path="res://content/GMTK2026/Enemies/enemy.gd" id="1_3etdh"]
 [ext_resource type="Texture2D" uid="uid://c83eayomsthlv" path="res://content/Kenney/kenney_space-shooter-remastered/PNG/Enemies/enemyRed4.png" id="1_rij3f"]
 [ext_resource type="PackedScene" uid="uid://7arbusl5a4df" path="res://content/GMTK2026/Enemies/EnemyB/enemy_b.tscn" id="2_op6rf"]
+[ext_resource type="Texture2D" uid="uid://d1lip3vsky65u" path="res://content/GiantLightStudios_SimpleShapes/circle_256.png" id="3_3q57m"]
 [ext_resource type="PackedScene" uid="uid://33hvpsh70ytv" path="res://content/GMTK2026/Components/screen_wrap.tscn" id="3_isuw1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2uyj2"]
 radius = 90.13878
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dhrd0"]
+radius = 150.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3etdh"]
 content_margin_left = 2.0
@@ -21,9 +25,21 @@ gravity_scale = 0.0
 linear_damp = 2.0
 script = ExtResource("1_3etdh")
 splits_into = ExtResource("2_op6rf")
+attack_color = Color(0.73333335, 0.42352942, 0.18039216, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=46363109]
 shape = SubResource("CircleShape2D_2uyj2")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=215313955]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=356251038]
+shape = SubResource("CircleShape2D_dhrd0")
+
+[node name="AttackSprite" type="Sprite2D" parent="AttackArea" unique_id=425987933]
+scale = Vector2(1.165, 1.165)
+texture = ExtResource("3_3q57m")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=252897917]
 scale = Vector2(2, 2)

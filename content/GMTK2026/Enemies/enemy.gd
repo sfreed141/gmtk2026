@@ -5,21 +5,32 @@ extends RigidBody2D
 @export var split_count := 8
 
 @export var hp := 3
-@export var attack_range := 150
 @export var speed := 1000
+
+@export var attack_range := 150
+@export var attack_telegraph_time := 0.6
+@export var attack_impact_time := 0.05
+@export var attack_recovery_time := 0.4
+@export var attack_color := Color.DARK_ORANGE
+@export var attack_damage := 1
 
 @onready var _ui: Node2D = $UI
 @onready var _hp_bar: ProgressBar = $UI/HpBar
 @onready var _chase_target: Node2D = get_tree().get_first_node_in_group("player")
+@onready var _attack_area: Area2D = $AttackArea
+@onready var _attack_sprite: Sprite2D = $AttackArea/AttackSprite
 
 const _BAR_SIZE_PER_HP = 32
 var _max_hp
+var _attacking = false
 
 func _ready():
 	_max_hp = hp
 	_hp_bar.max_value = hp
 	_hp_bar.size.x = _BAR_SIZE_PER_HP * hp
 	_hp_bar.position.x = -_hp_bar.size.x / 2
+	
+	_attack_sprite.hide()
 
 func apply_hit(damage: int):
 	hp -= damage
@@ -58,8 +69,44 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	var to_chase_target = _chase_target.global_position - global_position
-	if to_chase_target.length() < attack_range:
-		pass
-	else:
-		var f = to_chase_target.normalized() * speed
-		apply_central_force(f)
+	var f = to_chase_target.normalized() * speed * (0.5 if _attacking else 1.0)
+	apply_central_force(f)
+
+	if not _attacking and to_chase_target.length() < attack_range:
+		_attack()
+
+func _attack():
+	assert(not _attacking)
+	_attacking = true
+	
+	var initial_sprite_scale = _attack_sprite.scale
+	_attack_sprite.modulate = attack_color
+	_attack_sprite.modulate.a = 0
+	_attack_sprite.show()
+	
+	var telegraph_color = attack_color
+	telegraph_color.a = 0.4
+	
+	var t = create_tween()
+	# telegraph
+	t.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+	t.tween_property(_attack_sprite, "modulate", telegraph_color, attack_telegraph_time)
+	# impact
+	t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	t.tween_property(_attack_sprite, "modulate", attack_color, attack_impact_time)
+	t.parallel().tween_property(_attack_sprite, "scale", initial_sprite_scale * 1.1, attack_impact_time)
+	t.tween_callback(func ():
+		var bodies = _attack_area.get_overlapping_bodies()
+		for b: Node2D in bodies:
+			if b.is_in_group("player"):
+				b.apply_hit(attack_damage)
+	)
+	# recovery
+	t.tween_property(_attack_sprite, "scale", initial_sprite_scale * 0.9, attack_recovery_time)
+	t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	t.parallel().tween_property(_attack_sprite, "modulate", Color.TRANSPARENT, attack_recovery_time)
+	t.tween_callback(func ():
+		_attack_sprite.hide()
+		_attack_sprite.scale = initial_sprite_scale
+		_attacking = false
+	)

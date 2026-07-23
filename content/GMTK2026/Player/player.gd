@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+signal defeated()
+
+@export var hp := 5
 
 @export var max_speed := 800.0
 @export var acceleration := 4800.0
@@ -21,6 +24,14 @@ var _charge_start_time_ms: int
 const _CHARGE_MODULATE := Color(5.0, 5.0, 5.0)
 var _hit_bodies: Dictionary
 
+func apply_hit(damage: int):
+	if hp > 0:
+		hp -= damage
+		if hp <= 0:
+			defeated.emit()
+			set_process(false)
+			set_physics_process(false)
+			
 func _make_charge_tween() -> Tween:
 	var t = create_tween()
 	t.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_LINEAR)

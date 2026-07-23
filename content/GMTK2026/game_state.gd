@@ -30,5 +30,11 @@ func _on_split_timeout():
 
 func _split_node_exiting(_n):
 	if split_node_root.get_child_count() == 1:
-		game_over.emit(true)
-		_split_timer.stop()
+		_end_game(true)
+
+func _end_game(won: bool):
+	game_over.emit(won)
+	_split_timer.stop()
+
+func _on_player_defeated() -> void:
+	_end_game(false)
