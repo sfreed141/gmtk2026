@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 @export var split_time := 8
-@export var splits_into := preload("res://content/GMTK2026/enemy_b.tscn")
+@export var splits_into := preload("res://content/GMTK2026/Enemies/EnemyB/enemy_b.tscn")
 @export var split_count := 8
 
 @export var hp := 3

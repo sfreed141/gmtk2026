@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://33hvpsh70ytv"]
+
+[ext_resource type="Script" uid="uid://ddont5wjdxry5" path="res://content/GMTK2026/Components/screen_wrap.gd" id="1_h5bxy"]
+
+[node name="Node" type="Node" unique_id=15101817]
+script = ExtResource("1_h5bxy")

@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://6tnlbmcdw1b3"]
+
+[ext_resource type="Texture2D" uid="uid://4g7rw5if5dd5" path="res://content/Kenney/kenney_space-shooter-remastered/PNG/Meteors/meteorBrown_big1.png" id="1_s5fiv"]
+[ext_resource type="PackedScene" uid="uid://33hvpsh70ytv" path="res://content/GMTK2026/Components/screen_wrap.tscn" id="2_km4r6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p7irm"]
+radius = 88.02273
+
+[node name="Meteor" type="RigidBody2D" unique_id=1801966911]
+mass = 10.0
+gravity_scale = 0.0
+inertia = 50000.0
+linear_damp = 2.0
+angular_damp = 2.0
+constant_force = Vector2(100, 40)
+constant_torque = 10000.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1462395546]
+scale = Vector2(2, 2)
+texture = ExtResource("1_s5fiv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=983160805]
+shape = SubResource("CircleShape2D_p7irm")
+
+[node name="ScreenWrap" parent="." unique_id=15101817 instance=ExtResource("2_km4r6")]

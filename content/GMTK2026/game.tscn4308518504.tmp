@@ -56,7 +56,7 @@ position = Vector2(744, 403)
 [node name="Enemies" type="Node2D" parent="World/LevelRoot" unique_id=1446069090]
 
 [node name="EnemyA" parent="World/LevelRoot/Enemies" unique_id=920603194 instance=ExtResource("3_u0ef4")]
-position = Vector2(1178, 536)
+position = Vector2(1178, 535)
 
 [node name="EnemyB" parent="World/LevelRoot/Enemies" unique_id=637357591 instance=ExtResource("4_6d6ul")]
 position = Vector2(1178, 856)

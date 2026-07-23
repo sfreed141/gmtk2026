@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://cbg0xwvkai56i"]
 
-[ext_resource type="Script" uid="uid://cwa62mqm4wtfa" path="res://content/GMTK2026/enemy.gd" id="1_3etdh"]
+[ext_resource type="Script" uid="uid://cwa62mqm4wtfa" path="res://content/GMTK2026/Enemies/enemy.gd" id="1_3etdh"]
 [ext_resource type="Texture2D" uid="uid://c83eayomsthlv" path="res://content/Kenney/kenney_space-shooter-remastered/PNG/Enemies/enemyRed4.png" id="1_rij3f"]
+[ext_resource type="PackedScene" uid="uid://33hvpsh70ytv" path="res://content/GMTK2026/Components/screen_wrap.tscn" id="3_isuw1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2uyj2"]
 radius = 90.13878
@@ -59,3 +60,5 @@ max_value = 3.0
 step = 1.0
 value = 1.0
 show_percentage = false
+
+[node name="ScreenWrap" parent="." unique_id=15101817 instance=ExtResource("3_isuw1")]

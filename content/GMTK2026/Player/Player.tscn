@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://ci5oivu8iyji8"]
+
+[ext_resource type="Script" uid="uid://di0461riufsmq" path="res://content/GMTK2026/Player/player.gd" id="1_bg1o0"]
+[ext_resource type="Texture2D" uid="uid://d1d3q3n57vgca" path="res://content/GiantLightStudios_SimpleShapes/circle_outline_eighth_128.png" id="2_w4hnx"]
+[ext_resource type="Texture2D" uid="uid://dp3sm2t7r2tng" path="res://content/Kenney/kenney_particle-pack/PNG (Transparent)/star_04.png" id="3_b5hug"]
+[ext_resource type="Texture2D" uid="uid://cxvibdapcjnxc" path="res://content/Kenney/kenney_space-shooter-remastered/PNG/playerShip2_green.png" id="4_wytq3"]
+[ext_resource type="PackedScene" uid="uid://33hvpsh70ytv" path="res://content/GMTK2026/Components/screen_wrap.tscn" id="5_hp4mr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dhrd0"]
+radius = 38.052597
+
+[sub_resource type="Curve" id="Curve_qmd8u"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.3717256, 0.0, 0, 0]
+point_count = 2
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1569980812]
+motion_mode = 1
+script = ExtResource("1_bg1o0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=140275195]
+shape = SubResource("CircleShape2D_dhrd0")
+
+[node name="ChargeProgressBar" type="TextureProgressBar" parent="." unique_id=1367539647]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+fill_mode = 8
+radial_initial_angle = 180.0
+texture_progress = ExtResource("2_w4hnx")
+
+[node name="VisualPivot" type="Node2D" parent="." unique_id=1858189031]
+
+[node name="ThusterParticles" type="CPUParticles2D" parent="VisualPivot" unique_id=1611498685]
+position = Vector2(-25, 0)
+amount = 24
+texture = ExtResource("3_b5hug")
+draw_order = 1
+direction = Vector2(-1, 0)
+spread = 30.065
+gravity = Vector2(0, 0)
+initial_velocity_min = 68.97
+initial_velocity_max = 68.97
+angular_velocity_min = -90.000015
+angular_velocity_max = 89.999985
+scale_amount_min = 0.099999994
+scale_amount_max = 0.19999999
+scale_amount_curve = SubResource("Curve_qmd8u")
+
+[node name="BoostParticles" type="CPUParticles2D" parent="VisualPivot" unique_id=439378603]
+position = Vector2(-25, 0)
+emitting = false
+amount = 24
+texture = ExtResource("3_b5hug")
+one_shot = true
+explosiveness = 1.0
+draw_order = 1
+direction = Vector2(-1, 0)
+spread = 30.065
+gravity = Vector2(0, 0)
+initial_velocity_min = 378.6
+initial_velocity_max = 487.39
+angular_velocity_min = -90.000015
+angular_velocity_max = 89.999985
+scale_amount_min = 0.099999994
+scale_amount_max = 0.19999999
+scale_amount_curve = SubResource("Curve_qmd8u")
+
+[node name="Sprite2D" type="Sprite2D" parent="VisualPivot" unique_id=1187389429]
+rotation = 1.5707964
+texture = ExtResource("4_wytq3")
+
+[node name="ScreenWrap" parent="." unique_id=15101817 instance=ExtResource("5_hp4mr")]
