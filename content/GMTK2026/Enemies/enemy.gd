@@ -5,9 +5,12 @@ extends RigidBody2D
 @export var split_count := 8
 
 @export var hp := 3
+@export var attack_range := 150
+@export var speed := 1000
 
 @onready var _ui: Node2D = $UI
 @onready var _hp_bar: ProgressBar = $UI/HpBar
+@onready var _chase_target: Node2D = get_tree().get_first_node_in_group("player")
 
 const _BAR_SIZE_PER_HP = 32
 var _max_hp
@@ -52,3 +55,11 @@ func split():
 func _process(_delta: float) -> void:
 	_ui.rotation = -rotation
 	_hp_bar.value = hp
+
+func _physics_process(delta: float) -> void:
+	var to_chase_target = _chase_target.global_position - global_position
+	if to_chase_target.length() < attack_range:
+		pass
+	else:
+		var f = to_chase_target.normalized() * speed
+		apply_central_force(f)

@@ -17,9 +17,12 @@ bg_color = Color(0.73333335, 0.42352942, 0.18039216, 1)
 [node name="EnemyB" type="RigidBody2D" unique_id=637357591 groups=["split"]]
 mass = 10.0
 gravity_scale = 0.0
+linear_damp = 1.0
 script = ExtResource("1_8o63r")
 split_count = 2
 hp = 1
+attack_range = 100
+speed = 2000
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=421862378]
 shape = SubResource("CircleShape2D_e2bs0")
@@ -36,9 +39,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -50.0
-offset_top = 104.0
+offset_top = 54.085
 offset_right = 50.0
-offset_bottom = 136.0
+offset_bottom = 86.08506
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_8o63r")

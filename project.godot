@@ -25,6 +25,7 @@ window/stretch/aspect="expand"
 [global_group]
 
 split="split() called when countdown times out"
+player=""
 
 [input]
 
