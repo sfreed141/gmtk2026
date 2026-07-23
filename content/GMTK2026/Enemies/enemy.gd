@@ -1,28 +1,36 @@
 extends RigidBody2D
 
-@export var split_time := 8
-@export var splits_into := preload("res://content/GMTK2026/Enemies/EnemyB/enemy_b.tscn")
+# Leave as null to split into itself (can't assign same PackedScene as current scene because it creates a circular ref)
+@export var splits_into: PackedScene
 @export var split_count := 8
 
 @export var hp := 3
 
-@onready var _split_timer: Timer = $SplitTimer
+@onready var _ui: Node2D = $UI
+@onready var _hp_bar: ProgressBar = $UI/HpBar
 
-var _split_time_left: float
+var _max_hp
 
-func _ready() -> void:
-	_split_timer.timeout.connect(split)
-	_split_timer.start(split_time)
-	_split_time_left = split_time
+func _ready():
+	_max_hp = hp
+	_hp_bar.max_value = hp
 
 func apply_hit(damage: int):
 	hp -= damage
 	if hp <= 0:
 		queue_free()
 
-func split():
+func _get_split_instance() -> RigidBody2D:
+	if splits_into:
+		return splits_into.instantiate()
+	else:
+		var instance = duplicate()
+		instance.hp = _max_hp
+		return instance
+
+func split():	
 	for i in split_count:
-		var instance: RigidBody2D = splits_into.instantiate()
+		var instance: RigidBody2D = _get_split_instance()
 		instance.position = global_position
 		add_sibling(instance)
 		
@@ -39,9 +47,5 @@ func split():
 	queue_free()
 
 func _process(_delta: float) -> void:
-	$UI.rotation = -rotation
-	
-	var seconds_left = floori(_split_timer.time_left)
-	$UI/Label.text = str(seconds_left)
-	
-	$UI/HpBar.value = hp
+	_ui.rotation = -rotation
+	_hp_bar.value = hp

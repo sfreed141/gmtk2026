@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cusxtphoogycf"]
 
+[ext_resource type="PackedScene" uid="uid://bngvkmlaormk1" path="res://content/GMTK2026/game_state.tscn" id="1_p7irm"]
 [ext_resource type="PackedScene" uid="uid://6tnlbmcdw1b3" path="res://content/GMTK2026/Environment/Meteors/meteor.tscn" id="2_hxwgx"]
 [ext_resource type="Texture2D" uid="uid://cw7fmxi78snk7" path="res://content/GMTK2026/starfield.png" id="2_qmd8u"]
 [ext_resource type="PackedScene" uid="uid://cbg0xwvkai56i" path="res://content/GMTK2026/Enemies/EnemyA/enemy_a.tscn" id="3_u0ef4"]
-[ext_resource type="PackedScene" uid="uid://7arbusl5a4df" path="res://content/GMTK2026/Enemies/EnemyB/enemy_b.tscn" id="4_6d6ul"]
 [ext_resource type="PackedScene" uid="uid://ci5oivu8iyji8" path="res://content/GMTK2026/Player/Player.tscn" id="5_p7irm"]
 
 [node name="Game" type="Node" unique_id=159096374]
@@ -14,6 +14,8 @@
 position = Vector2(960, 540)
 process_callback = 0
 position_smoothing_enabled = true
+
+[node name="GameState" parent="World" unique_id=1572984397 instance=ExtResource("1_p7irm")]
 
 [node name="LevelRoot" type="Node2D" parent="World" unique_id=1383105338]
 
@@ -57,9 +59,6 @@ position = Vector2(744, 403)
 
 [node name="EnemyA" parent="World/LevelRoot/Enemies" unique_id=920603194 instance=ExtResource("3_u0ef4")]
 position = Vector2(1178, 536)
-
-[node name="EnemyB" parent="World/LevelRoot/Enemies" unique_id=637357591 instance=ExtResource("4_6d6ul")]
-position = Vector2(1178, 856)
 
 [node name="PlayerStart" type="Node2D" parent="World" unique_id=1920689040]
 position = Vector2(960, 540)

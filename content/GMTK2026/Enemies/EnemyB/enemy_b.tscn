@@ -1,19 +1,50 @@
 [gd_scene format=3 uid="uid://7arbusl5a4df"]
 
+[ext_resource type="Script" uid="uid://cwa62mqm4wtfa" path="res://content/GMTK2026/Enemies/enemy.gd" id="1_8o63r"]
 [ext_resource type="Texture2D" uid="uid://c83eayomsthlv" path="res://content/Kenney/kenney_space-shooter-remastered/PNG/Enemies/enemyRed4.png" id="1_37obe"]
 [ext_resource type="PackedScene" uid="uid://33hvpsh70ytv" path="res://content/GMTK2026/Components/screen_wrap.tscn" id="2_8o63r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e2bs0"]
 radius = 45.17743
 
-[node name="EnemyB" type="RigidBody2D" unique_id=637357591]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8o63r"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.73333335, 0.42352942, 0.18039216, 1)
+
+[node name="EnemyB" type="RigidBody2D" unique_id=637357591 groups=["split"]]
 mass = 10.0
 gravity_scale = 0.0
+script = ExtResource("1_8o63r")
+split_count = 2
+hp = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=421862378]
 shape = SubResource("CircleShape2D_e2bs0")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=294413503]
 texture = ExtResource("1_37obe")
+
+[node name="UI" type="Node2D" parent="." unique_id=1941471312]
+
+[node name="HpBar" type="ProgressBar" parent="UI" unique_id=44659394]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 104.0
+offset_right = 50.0
+offset_bottom = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_8o63r")
+max_value = 3.0
+step = 1.0
+value = 1.0
+show_percentage = false
 
 [node name="ScreenWrap" parent="." unique_id=15101817 instance=ExtResource("2_8o63r")]
