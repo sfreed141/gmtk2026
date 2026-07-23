@@ -9,11 +9,14 @@ extends RigidBody2D
 @onready var _ui: Node2D = $UI
 @onready var _hp_bar: ProgressBar = $UI/HpBar
 
+const _BAR_SIZE_PER_HP = 32
 var _max_hp
 
 func _ready():
 	_max_hp = hp
 	_hp_bar.max_value = hp
+	_hp_bar.size.x = _BAR_SIZE_PER_HP * hp
+	_hp_bar.position.x = -_hp_bar.size.x / 2
 
 func apply_hit(damage: int):
 	hp -= damage
