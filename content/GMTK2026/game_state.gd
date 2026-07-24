@@ -57,6 +57,7 @@ func _split_node_exiting(_n):
 func _end_game(won: bool):
 	game_over.emit(won)
 	_split_timer.stop()
+	_wave_timer.stop()
 
 func _on_player_defeated() -> void:
 	_end_game(false)
