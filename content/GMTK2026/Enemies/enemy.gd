@@ -52,8 +52,8 @@ func split():
 		add_sibling(instance)
 		
 		var instance_collision_mask = instance.collision_mask
-		var spawn_angle = i * 2 * PI / split_count
-		var spawn_dist = 200
+		var spawn_angle = i * 2 * PI / split_count + randf_range(0, 2 * PI / split_count)
+		var spawn_dist = 200 * randf_range(0.5, 2.0)
 		var spawn_position = global_position + spawn_dist * Vector2.RIGHT.rotated(spawn_angle)
 		var t = get_tree().create_tween()
 		t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
