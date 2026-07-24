@@ -5,8 +5,9 @@ signal start()
 @export var time_to_start := 3
 
 @onready var _timer: Timer = $Timer
+@onready var _start_area_ui: Control = %StartAreaUI
 @onready var _start_game_countdown_label: Label = %StartGameCountdownLabel
-@onready var _sprite: Sprite2D = $Sprite2D
+@onready var _progress_ring: TextureProgressBar = %ProgressRing
 
 func set_collision_enabled(enabled: bool):
 	$CollisionShape2D.disabled = not enabled
@@ -21,19 +22,19 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if not _timer.is_stopped():
+		_progress_ring.value = _progress_ring.max_value * max(0, time_to_start - _timer.time_left) / time_to_start
 		_update_label()
 
 func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_VISIBILITY_CHANGED:
-			if _start_game_countdown_label:
-				_start_game_countdown_label.visible = visible
+			if _start_area_ui:
+				_start_area_ui.visible = visible
 
 func _on_body_entered(body: Node2D):
 	if body.is_in_group("player"):
 		_update_label()
 		_start_game_countdown_label.show()
-		_sprite.modulate.a = 1.
 		_timer.start()
 
 func _on_body_exited(body: Node2D):
@@ -44,8 +45,8 @@ func _on_timeout():
 	start.emit()
 
 func _reset():
+	_progress_ring.value = 0
 	_start_game_countdown_label.text = "Enter to start"
-	_sprite.modulate.a = .2
 	_timer.stop()
 
 func _update_label():

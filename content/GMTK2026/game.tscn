@@ -197,25 +197,80 @@ wait_time = 3.0
 shape = SubResource("CircleShape2D_dhrd0")
 
 [node name="Sprite2D" type="Sprite2D" parent="World/StartGameArea" unique_id=1659841105]
+modulate = Color(1, 1, 1, 0.2509804)
 texture = ExtResource("14_hgepx")
 
 [node name="Node" type="Node" parent="World/StartGameArea" unique_id=1805990883]
 
-[node name="MarginContainer" type="MarginContainer" parent="World/StartGameArea/Node" unique_id=1796458503]
+[node name="StartAreaUI" type="Control" parent="World/StartGameArea/Node" unique_id=206771219]
+unique_name_in_owner = true
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_top = 96
 
-[node name="StartGameCountdownLabel" type="Label" parent="World/StartGameArea/Node/MarginContainer" unique_id=1573387932]
+[node name="ProgressRing" type="TextureProgressBar" parent="World/StartGameArea/Node/StartAreaUI" unique_id=203833994]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.0
+offset_top = -364.0
+offset_right = 115.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 24.0
+fill_mode = 8
+radial_initial_angle = 180.0
+texture_progress = ExtResource("14_hgepx")
+
+[node name="MarginContainer" type="MarginContainer" parent="World/StartGameArea/Node/StartAreaUI" unique_id=1796458503]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 96
+theme_override_constants/margin_bottom = 96
+
+[node name="StartGameCountdownLabel" type="Label" parent="World/StartGameArea/Node/StartAreaUI/MarginContainer" unique_id=1573387932]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 48
 text = "Enter to start"
+
+[node name="ControlsLabel" type="Label" parent="World/StartGameArea/Node/StartAreaUI/MarginContainer" unique_id=1872659657]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 24
+text = "Controls
+
+Move: WASD/Joystick
+Charge: Hold Spacebar/Gamepad A
+
+Release Charge to Boost.
+Time it right for a Superboost!"
+
+[node name="GameplayLabel" type="Label" parent="World/StartGameArea/Node/StartAreaUI/MarginContainer" unique_id=907994687]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 24
+text = "Your Mission
+
+Defeat all enemies.
+Existing enemies split
+and reinforcements arrive periodically."
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1570526261]
 
