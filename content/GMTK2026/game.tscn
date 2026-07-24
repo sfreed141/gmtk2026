@@ -255,7 +255,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 48
-text = "Enter to start"
+text = "Enter ring to start"
 
 [node name="ControlAnimatorComponent" parent="World/StartGameArea/Node/StartAreaUI/MarginContainer/StartGameCountdownLabel" unique_id=1893011213 instance=ExtResource("15_hgepx")]
 pulse_scale = 1.1

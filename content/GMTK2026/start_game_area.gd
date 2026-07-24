@@ -46,7 +46,7 @@ func _on_timeout():
 
 func _reset():
 	_progress_ring.value = 0
-	_start_game_countdown_label.text = "Enter to start"
+	_start_game_countdown_label.text = "Enter ring to start"
 	_timer.stop()
 
 func _update_label():
