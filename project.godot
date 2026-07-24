@@ -27,6 +27,10 @@ window/stretch/aspect="expand"
 split="split() called when countdown times out"
 player=""
 
+[gui]
+
+theme/custom_font="uid://c564bt1vx1rkj"
+
 [input]
 
 left={
