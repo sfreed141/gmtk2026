@@ -4,6 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://c83eayomsthlv" path="res://content/Kenney/kenney_space-shooter-remastered/PNG/Enemies/enemyRed4.png" id="1_37obe"]
 [ext_resource type="PackedScene" uid="uid://33hvpsh70ytv" path="res://content/GMTK2026/Components/screen_wrap.tscn" id="2_8o63r"]
 [ext_resource type="Texture2D" uid="uid://d1lip3vsky65u" path="res://content/GiantLightStudios_SimpleShapes/circle_256.png" id="2_ib6n0"]
+[ext_resource type="Script" uid="uid://b3nwtlpygc74r" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="5_aiwqc"]
+[ext_resource type="Script" uid="uid://dgrrrm5nf2bcx" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="6_iia3i"]
+[ext_resource type="Script" uid="uid://j1rl8bec286h" path="res://addons/shaker/data/Vector2/ShakerTypeRandom2D.gd" id="7_e0yy0"]
+[ext_resource type="Script" uid="uid://balvcdikngibq" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="8_jhowh"]
+[ext_resource type="Script" uid="uid://cfb8ifkrx5yrp" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="9_hkbf8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e2bs0"]
 radius = 45.17743
@@ -17,6 +22,21 @@ content_margin_top = 2.0
 content_margin_right = 2.0
 content_margin_bottom = 2.0
 bg_color = Color(0.73333335, 0.42352942, 0.18039216, 1)
+
+[sub_resource type="Resource" id="Resource_0kts2"]
+script = ExtResource("7_e0yy0")
+metadata/_custom_type_script = "uid://j1rl8bec286h"
+
+[sub_resource type="Resource" id="Resource_tyujb"]
+script = ExtResource("7_e0yy0")
+amplitude = Vector2(0.02, 0.02)
+metadata/_custom_type_script = "uid://j1rl8bec286h"
+
+[sub_resource type="Resource" id="Resource_tab7w"]
+script = ExtResource("9_hkbf8")
+PositionShake = Array[ExtResource("6_iia3i")]([SubResource("Resource_0kts2")])
+ScaleShake = Array[ExtResource("6_iia3i")]([SubResource("Resource_tyujb")])
+metadata/_custom_type_script = "uid://cfb8ifkrx5yrp"
 
 [node name="EnemyB" type="RigidBody2D" unique_id=637357591 groups=["split"]]
 mass = 10.0
@@ -66,3 +86,10 @@ value = 1.0
 show_percentage = false
 
 [node name="ScreenWrap" parent="." unique_id=15101817 instance=ExtResource("2_8o63r")]
+
+[node name="ShakerComponent2D" type="Node2D" parent="." unique_id=1817723865]
+script = ExtResource("5_aiwqc")
+intensity = 2.865
+duration = 0.2
+shakerPreset = SubResource("Resource_tab7w")
+metadata/_custom_type_script = "uid://b3nwtlpygc74r"

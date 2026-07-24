@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal defeated()
+signal hit()
 
 @export var hp := 5
 @export var hit_invulnerability_duration: float = 1.
@@ -19,6 +20,7 @@ signal defeated()
 @onready var _boost_particles: CPUParticles2D = $VisualPivot/BoostParticles
 @onready var _charge_progress_bar: TextureProgressBar = $ChargeProgressBar
 @onready var _hp_container: HBoxContainer = %HPContainer
+@onready var _boost_shaker: ShakerComponent2D = $VisualPivot/BoostShaker
 var _look_direction := Vector2.RIGHT
 var _charge_tween: Tween
 var _boost_tween: Tween
@@ -34,6 +36,7 @@ func apply_hit(damage: int):
 		hp -= damage
 		_last_hit_time_ms = hit_time_ms
 		_update_hp_ui()
+		hit.emit()
 		if hp <= 0:
 			defeated.emit()
 			set_process(false)
@@ -94,6 +97,11 @@ func _physics_process(delta: float) -> void:
 		const BOOST_SUPER_MARGIN = 0.1
 		if absf(charge_weight - 1.0) < BOOST_SUPER_MARGIN:
 			_charge_progress_bar.modulate = Color.FOREST_GREEN
+			_boost_shaker.intensity = 4
+			_boost_shaker.play_shake()
+		else:
+			_boost_shaker.intensity = 1
+			_boost_shaker.play_shake()
 		
 		var boost_direction = _visual_pivot.global_transform.basis_xform(Vector2.RIGHT)
 		var boost_speed = max_speed * boost_speed_multiplier * min(charge_weight, 1)

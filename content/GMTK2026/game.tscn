@@ -2,12 +2,26 @@
 
 [ext_resource type="Script" uid="uid://dj5750m0plcam" path="res://content/GMTK2026/game.gd" id="1_e2bs0"]
 [ext_resource type="PackedScene" uid="uid://bngvkmlaormk1" path="res://content/GMTK2026/game_state.tscn" id="1_p7irm"]
+[ext_resource type="Script" uid="uid://b3nwtlpygc74r" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="2_7bfig"]
 [ext_resource type="PackedScene" uid="uid://6tnlbmcdw1b3" path="res://content/GMTK2026/Environment/Meteors/meteor.tscn" id="2_hxwgx"]
 [ext_resource type="Texture2D" uid="uid://cw7fmxi78snk7" path="res://content/GMTK2026/starfield.png" id="2_qmd8u"]
 [ext_resource type="Resource" uid="uid://crcvin6i0ci8g" path="res://content/GMTK2026/starter_wave.tres" id="3_6d6ul"]
 [ext_resource type="PackedScene" uid="uid://cbg0xwvkai56i" path="res://content/GMTK2026/Enemies/EnemyA/enemy_a.tscn" id="3_u0ef4"]
+[ext_resource type="Script" uid="uid://dgrrrm5nf2bcx" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="3_yutxw"]
 [ext_resource type="PackedScene" uid="uid://7arbusl5a4df" path="res://content/GMTK2026/Enemies/EnemyB/enemy_b.tscn" id="4_6d6ul"]
+[ext_resource type="Script" uid="uid://j1rl8bec286h" path="res://addons/shaker/data/Vector2/ShakerTypeRandom2D.gd" id="4_7bfig"]
+[ext_resource type="Script" uid="uid://balvcdikngibq" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="5_ir85l"]
 [ext_resource type="PackedScene" uid="uid://ci5oivu8iyji8" path="res://content/GMTK2026/Player/Player.tscn" id="5_p7irm"]
+[ext_resource type="Script" uid="uid://cfb8ifkrx5yrp" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="6_w7hgs"]
+
+[sub_resource type="Resource" id="Resource_qomxq"]
+script = ExtResource("4_7bfig")
+metadata/_custom_type_script = "uid://j1rl8bec286h"
+
+[sub_resource type="Resource" id="Resource_2uyj2"]
+script = ExtResource("6_w7hgs")
+PositionShake = Array[ExtResource("3_yutxw")]([SubResource("Resource_qomxq")])
+metadata/_custom_type_script = "uid://cfb8ifkrx5yrp"
 
 [node name="Game" type="Node" unique_id=159096374]
 script = ExtResource("1_e2bs0")
@@ -16,9 +30,16 @@ script = ExtResource("1_e2bs0")
 unique_name_in_owner = true
 
 [node name="Camera2D" type="Camera2D" parent="World" unique_id=319467351]
-position = Vector2(960, 540)
+position = Vector2(960.0031, 540.0021)
 process_callback = 0
 position_smoothing_enabled = true
+
+[node name="ShakerComponent2D" type="Node2D" parent="World/Camera2D" unique_id=127601621]
+script = ExtResource("2_7bfig")
+intensity = 17.665
+duration = 0.3
+shakerPreset = SubResource("Resource_2uyj2")
+metadata/_custom_type_script = "uid://b3nwtlpygc74r"
 
 [node name="GameState" parent="World" unique_id=1572984397 node_paths=PackedStringArray("wave_spawn_points_root", "split_node_root") instance=ExtResource("1_p7irm")]
 unique_name_in_owner = true
@@ -169,5 +190,6 @@ text = "Quit to Main Menu"
 
 [connection signal="game_over" from="World/GameState" to="." method="_on_game_state_game_over"]
 [connection signal="defeated" from="World/PlayerStart/Player" to="World/GameState" method="_on_player_defeated"]
+[connection signal="hit" from="World/PlayerStart/Player" to="World/Camera2D/ShakerComponent2D" method="play_shake"]
 [connection signal="pressed" from="CanvasLayer/GameOverOverlay/Panel/CenterContainer/VBoxContainer/GameOverRestartButton" to="." method="_on_game_over_restart_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GameOverOverlay/Panel/CenterContainer/VBoxContainer/GameOverQuitButton" to="." method="_on_game_over_quit_button_pressed"]

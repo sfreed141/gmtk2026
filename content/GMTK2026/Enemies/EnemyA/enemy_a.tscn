@@ -5,6 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://7arbusl5a4df" path="res://content/GMTK2026/Enemies/EnemyB/enemy_b.tscn" id="2_op6rf"]
 [ext_resource type="Texture2D" uid="uid://d1lip3vsky65u" path="res://content/GiantLightStudios_SimpleShapes/circle_256.png" id="3_3q57m"]
 [ext_resource type="PackedScene" uid="uid://33hvpsh70ytv" path="res://content/GMTK2026/Components/screen_wrap.tscn" id="3_isuw1"]
+[ext_resource type="Script" uid="uid://b3nwtlpygc74r" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="6_gbtgk"]
+[ext_resource type="Script" uid="uid://dgrrrm5nf2bcx" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="7_wkj3d"]
+[ext_resource type="Script" uid="uid://j1rl8bec286h" path="res://addons/shaker/data/Vector2/ShakerTypeRandom2D.gd" id="8_phims"]
+[ext_resource type="Script" uid="uid://balvcdikngibq" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="9_oxhki"]
+[ext_resource type="Script" uid="uid://cfb8ifkrx5yrp" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="10_0l5s6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2uyj2"]
 radius = 90.13878
@@ -19,7 +24,24 @@ content_margin_right = 2.0
 content_margin_bottom = 2.0
 bg_color = Color(0.73333335, 0.42352942, 0.18039216, 1)
 
+[sub_resource type="Resource" id="Resource_0kts2"]
+script = ExtResource("8_phims")
+metadata/_custom_type_script = "uid://j1rl8bec286h"
+
+[sub_resource type="Resource" id="Resource_tyujb"]
+script = ExtResource("8_phims")
+amplitude = Vector2(0.02, 0.02)
+metadata/_custom_type_script = "uid://j1rl8bec286h"
+
+[sub_resource type="Resource" id="Resource_dhrd0"]
+script = ExtResource("10_0l5s6")
+PositionShake = Array[ExtResource("7_wkj3d")]([SubResource("Resource_0kts2")])
+ScaleShake = Array[ExtResource("7_wkj3d")]([SubResource("Resource_tyujb")])
+metadata/_custom_type_script = "uid://cfb8ifkrx5yrp"
+
 [node name="EnemyA" type="RigidBody2D" unique_id=920603194 groups=["split"]]
+position = Vector2(2.8647482e-06, -3.091991e-07)
+scale = Vector2(1.0000005, 0.9999989)
 mass = 10.0
 gravity_scale = 0.0
 linear_damp = 2.0
@@ -66,3 +88,10 @@ value = 1.0
 show_percentage = false
 
 [node name="ScreenWrap" parent="." unique_id=15101817 instance=ExtResource("3_isuw1")]
+
+[node name="ShakerComponent2D" type="Node2D" parent="." unique_id=1410722039]
+script = ExtResource("6_gbtgk")
+intensity = 2.865
+duration = 0.2
+shakerPreset = SubResource("Resource_dhrd0")
+metadata/_custom_type_script = "uid://b3nwtlpygc74r"

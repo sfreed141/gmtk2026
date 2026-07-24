@@ -19,6 +19,7 @@ extends RigidBody2D
 @onready var _chase_target: Node2D = get_tree().get_first_node_in_group("player")
 @onready var _attack_area: Area2D = $AttackArea
 @onready var _attack_sprite: Sprite2D = $AttackArea/AttackSprite
+@onready var _shaker_component: ShakerComponent2D = $ShakerComponent2D
 
 const _BAR_SIZE_PER_HP = 32
 var _max_hp
@@ -34,6 +35,7 @@ func _ready():
 
 func apply_hit(damage: int):
 	hp -= damage
+	_shaker_component.play_shake()
 	if hp <= 0:
 		queue_free()
 
@@ -96,6 +98,7 @@ func _attack():
 	t.tween_property(_attack_sprite, "modulate", attack_color, attack_impact_time)
 	t.parallel().tween_property(_attack_sprite, "scale", initial_sprite_scale * 1.1, attack_impact_time)
 	t.tween_callback(func ():
+		_shaker_component.play_shake()
 		var bodies = _attack_area.get_overlapping_bodies()
 		for b: Node2D in bodies:
 			if b.is_in_group("player"):

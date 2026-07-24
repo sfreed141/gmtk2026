@@ -5,7 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://dp3sm2t7r2tng" path="res://content/Kenney/kenney_particle-pack/PNG (Transparent)/star_04.png" id="3_b5hug"]
 [ext_resource type="Texture2D" uid="uid://cxvibdapcjnxc" path="res://content/Kenney/kenney_space-shooter-remastered/PNG/playerShip2_green.png" id="4_wytq3"]
 [ext_resource type="PackedScene" uid="uid://33hvpsh70ytv" path="res://content/GMTK2026/Components/screen_wrap.tscn" id="5_hp4mr"]
+[ext_resource type="Script" uid="uid://b3nwtlpygc74r" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="5_kl35h"]
+[ext_resource type="Script" uid="uid://dgrrrm5nf2bcx" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="6_80x3s"]
 [ext_resource type="Texture2D" uid="uid://37l44qogm1pc" path="res://content/Kenney/kenney_space-shooter-remastered/PNG/UI/playerLife2_green.png" id="6_w4hnx"]
+[ext_resource type="Script" uid="uid://j1rl8bec286h" path="res://addons/shaker/data/Vector2/ShakerTypeRandom2D.gd" id="7_8c1it"]
+[ext_resource type="Script" uid="uid://balvcdikngibq" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="8_3fwrr"]
+[ext_resource type="Script" uid="uid://cfb8ifkrx5yrp" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="9_l3dj5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dhrd0"]
 radius = 38.052597
@@ -13,6 +18,21 @@ radius = 38.052597
 [sub_resource type="Curve" id="Curve_qmd8u"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.3717256, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Resource" id="Resource_0kts2"]
+script = ExtResource("7_8c1it")
+metadata/_custom_type_script = "uid://j1rl8bec286h"
+
+[sub_resource type="Resource" id="Resource_tyujb"]
+script = ExtResource("7_8c1it")
+amplitude = Vector2(0.02, 0.02)
+metadata/_custom_type_script = "uid://j1rl8bec286h"
+
+[sub_resource type="Resource" id="Resource_dhrd0"]
+script = ExtResource("9_l3dj5")
+PositionShake = Array[ExtResource("6_80x3s")]([SubResource("Resource_0kts2")])
+ScaleShake = Array[ExtResource("6_80x3s")]([SubResource("Resource_tyujb")])
+metadata/_custom_type_script = "uid://cfb8ifkrx5yrp"
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1569980812 groups=["player"]]
 motion_mode = 1
@@ -39,6 +59,8 @@ radial_initial_angle = 180.0
 texture_progress = ExtResource("2_w4hnx")
 
 [node name="VisualPivot" type="Node2D" parent="." unique_id=1858189031]
+position = Vector2(-7.8137964e-07, 2.30968e-07)
+scale = Vector2(0.9999999, 1)
 
 [node name="ThusterParticles" type="CPUParticles2D" parent="VisualPivot" unique_id=1611498685]
 position = Vector2(-25, 0)
@@ -78,6 +100,14 @@ scale_amount_curve = SubResource("Curve_qmd8u")
 [node name="Sprite2D" type="Sprite2D" parent="VisualPivot" unique_id=1187389429]
 rotation = 1.5707964
 texture = ExtResource("4_wytq3")
+
+[node name="BoostShaker" type="Node2D" parent="VisualPivot" unique_id=537155686]
+script = ExtResource("5_kl35h")
+intensity = 2.995
+duration = 1.0
+fade_out = 0.8122518
+shakerPreset = SubResource("Resource_dhrd0")
+metadata/_custom_type_script = "uid://b3nwtlpygc74r"
 
 [node name="ScreenWrap" parent="." unique_id=15101817 instance=ExtResource("5_hp4mr")]
 
