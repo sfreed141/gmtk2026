@@ -5,6 +5,8 @@
 [node name="GameState" type="Node" unique_id=1572984397]
 script = ExtResource("1_xgowh")
 
+[node name="WaveTimer" type="Timer" parent="." unique_id=1721995503]
+
 [node name="SplitTimer" type="Timer" parent="." unique_id=1924284112]
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1604425057]
@@ -16,8 +18,24 @@ offset_right = 20.0
 offset_bottom = 40.0
 grow_horizontal = 2
 
-[node name="SplitCountdownLabel" type="Label" parent="MarginContainer" unique_id=1503705827]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=340139132]
+layout_mode = 2
+
+[node name="SplitCountdownLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1503705827]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
-text = "10"
+text = "Split in 10"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer" unique_id=2084215371]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 292
+
+[node name="WaveCountdownLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1957743663]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Wave in 10"

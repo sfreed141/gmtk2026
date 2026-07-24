@@ -67,7 +67,7 @@ func _process(_delta: float) -> void:
 	_ui.rotation = -rotation
 	_hp_bar.value = hp
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var to_chase_target = _chase_target.global_position - global_position
 	var f = to_chase_target.normalized() * speed * (0.5 if _attacking else 1.0)
 	apply_central_force(f)

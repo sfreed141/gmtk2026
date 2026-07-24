@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bngvkmlaormk1" path="res://content/GMTK2026/game_state.tscn" id="1_p7irm"]
 [ext_resource type="PackedScene" uid="uid://6tnlbmcdw1b3" path="res://content/GMTK2026/Environment/Meteors/meteor.tscn" id="2_hxwgx"]
 [ext_resource type="Texture2D" uid="uid://cw7fmxi78snk7" path="res://content/GMTK2026/starfield.png" id="2_qmd8u"]
+[ext_resource type="Resource" uid="uid://crcvin6i0ci8g" path="res://content/GMTK2026/starter_wave.tres" id="3_6d6ul"]
 [ext_resource type="PackedScene" uid="uid://cbg0xwvkai56i" path="res://content/GMTK2026/Enemies/EnemyA/enemy_a.tscn" id="3_u0ef4"]
 [ext_resource type="PackedScene" uid="uid://7arbusl5a4df" path="res://content/GMTK2026/Enemies/EnemyB/enemy_b.tscn" id="4_6d6ul"]
 [ext_resource type="PackedScene" uid="uid://ci5oivu8iyji8" path="res://content/GMTK2026/Player/Player.tscn" id="5_p7irm"]
@@ -19,8 +20,10 @@ position = Vector2(960, 540)
 process_callback = 0
 position_smoothing_enabled = true
 
-[node name="GameState" parent="World" unique_id=1572984397 node_paths=PackedStringArray("split_node_root") instance=ExtResource("1_p7irm")]
+[node name="GameState" parent="World" unique_id=1572984397 node_paths=PackedStringArray("wave_spawn_points_root", "split_node_root") instance=ExtResource("1_p7irm")]
 unique_name_in_owner = true
+wave_definition = ExtResource("3_6d6ul")
+wave_spawn_points_root = NodePath("../LevelRoot/SpawnPositions")
 split_node_root = NodePath("../LevelRoot/Enemies")
 
 [node name="LevelRoot" type="Node2D" parent="World" unique_id=1383105338]
@@ -86,6 +89,29 @@ position = Vector2(437, 912)
 
 [node name="EnemyB4" parent="World/LevelRoot/Enemies" unique_id=583543532 instance=ExtResource("4_6d6ul")]
 position = Vector2(1780, 115)
+
+[node name="SpawnPositions" type="Node2D" parent="World/LevelRoot" unique_id=921774044]
+
+[node name="Marker2D" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=2123392584]
+position = Vector2(528, 166)
+
+[node name="Marker2D2" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=1073357641]
+position = Vector2(1509, 301)
+
+[node name="Marker2D3" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=937831398]
+position = Vector2(262, 562)
+
+[node name="Marker2D4" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=1064982372]
+position = Vector2(608, 870)
+
+[node name="Marker2D5" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=437562812]
+position = Vector2(1178, 682)
+
+[node name="Marker2D6" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=229976696]
+position = Vector2(1442, 943)
+
+[node name="Marker2D7" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=910386115]
+position = Vector2(1729, 643)
 
 [node name="PlayerStart" type="Node2D" parent="World" unique_id=1920689040]
 position = Vector2(960, 540)
