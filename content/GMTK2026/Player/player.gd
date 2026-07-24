@@ -17,6 +17,7 @@ signal defeated()
 @onready var _sprite: Sprite2D = $VisualPivot/Sprite2D
 @onready var _boost_particles: CPUParticles2D = $VisualPivot/BoostParticles
 @onready var _charge_progress_bar: TextureProgressBar = $ChargeProgressBar
+@onready var _hp_container: HBoxContainer = %HPContainer
 var _look_direction := Vector2.RIGHT
 var _charge_tween: Tween
 var _boost_tween: Tween
@@ -27,11 +28,23 @@ var _hit_bodies: Dictionary
 func apply_hit(damage: int):
 	if hp > 0:
 		hp -= damage
+		_update_hp_ui()
 		if hp <= 0:
 			defeated.emit()
 			set_process(false)
 			set_physics_process(false)
-			
+
+func _update_hp_ui():
+	var hp_ui_count = _hp_container.get_child_count()
+	var hp_ui_diff = hp_ui_count - hp
+	if hp_ui_diff > 0:
+		for i in range(hp_ui_diff):
+			_hp_container.remove_child(_hp_container.get_child(0))
+	elif hp_ui_diff < 0:
+		var template = _hp_container.get_child(0)
+		for i in hp_ui_diff:
+			_hp_container.add_child(template.duplicate())
+
 func _make_charge_tween() -> Tween:
 	var t = create_tween()
 	t.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_LINEAR)
@@ -40,6 +53,10 @@ func _make_charge_tween() -> Tween:
 	t.tween_property(_charge_progress_bar, "value", 100, charge_time)
 	t.tween_property(_charge_progress_bar, "modulate", Color.WHITE, charge_time)
 	return t
+
+func _ready():
+	assert(hp > 0)
+	_update_hp_ui()
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("charge"):

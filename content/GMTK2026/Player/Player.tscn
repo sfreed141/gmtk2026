@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dp3sm2t7r2tng" path="res://content/Kenney/kenney_particle-pack/PNG (Transparent)/star_04.png" id="3_b5hug"]
 [ext_resource type="Texture2D" uid="uid://cxvibdapcjnxc" path="res://content/Kenney/kenney_space-shooter-remastered/PNG/playerShip2_green.png" id="4_wytq3"]
 [ext_resource type="PackedScene" uid="uid://33hvpsh70ytv" path="res://content/GMTK2026/Components/screen_wrap.tscn" id="5_hp4mr"]
+[ext_resource type="Texture2D" uid="uid://37l44qogm1pc" path="res://content/Kenney/kenney_space-shooter-remastered/PNG/UI/playerLife2_green.png" id="6_w4hnx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dhrd0"]
 radius = 38.052597
@@ -79,3 +80,62 @@ rotation = 1.5707964
 texture = ExtResource("4_wytq3")
 
 [node name="ScreenWrap" parent="." unique_id=15101817 instance=ExtResource("5_hp4mr")]
+
+[node name="HUD" type="Node" parent="." unique_id=866358123]
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD" unique_id=1804026026]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/MarginContainer" unique_id=1931346358]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/MarginContainer/PanelContainer" unique_id=515901889]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HPContainer" type="HBoxContainer" parent="HUD/MarginContainer/PanelContainer/MarginContainer" unique_id=426597571]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/MarginContainer/PanelContainer/MarginContainer/HPContainer" unique_id=155605825]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("6_w4hnx")
+expand_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="HUD/MarginContainer/PanelContainer/MarginContainer/HPContainer" unique_id=1336828633]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("6_w4hnx")
+expand_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="HUD/MarginContainer/PanelContainer/MarginContainer/HPContainer" unique_id=271662998]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("6_w4hnx")
+expand_mode = 3
+
+[node name="TextureRect4" type="TextureRect" parent="HUD/MarginContainer/PanelContainer/MarginContainer/HPContainer" unique_id=1188356573]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("6_w4hnx")
+expand_mode = 3
+
+[node name="TextureRect5" type="TextureRect" parent="HUD/MarginContainer/PanelContainer/MarginContainer/HPContainer" unique_id=1009675185]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("6_w4hnx")
+expand_mode = 3
