@@ -2,6 +2,7 @@ extends Node
 
 signal game_over(won: bool)
 
+@export var starter_wave: WaveDefinition
 @export var wave_time := 12
 @export var wave_definition: WaveDefinition
 @export var wave_spawn_points_root: Node
@@ -17,6 +18,7 @@ signal game_over(won: bool)
 @onready var _split_countdown_label: Label = %SplitCountdownLabel
 
 func restart():
+	starter_wave.spawn(split_node_root, wave_spawn_points_root.get_children())
 	_wave_timer.start(wave_time)
 	_split_timer.start(split_time)
 

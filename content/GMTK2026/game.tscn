@@ -5,14 +5,13 @@
 [ext_resource type="Script" uid="uid://b3nwtlpygc74r" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="2_7bfig"]
 [ext_resource type="PackedScene" uid="uid://6tnlbmcdw1b3" path="res://content/GMTK2026/Environment/Meteors/meteor.tscn" id="2_hxwgx"]
 [ext_resource type="Texture2D" uid="uid://cw7fmxi78snk7" path="res://content/GMTK2026/starfield.png" id="2_qmd8u"]
-[ext_resource type="Resource" uid="uid://crcvin6i0ci8g" path="res://content/GMTK2026/starter_wave.tres" id="3_6d6ul"]
-[ext_resource type="PackedScene" uid="uid://cbg0xwvkai56i" path="res://content/GMTK2026/Enemies/EnemyA/enemy_a.tscn" id="3_u0ef4"]
+[ext_resource type="Resource" uid="uid://dneh0p6b1knso" path="res://content/GMTK2026/starter_wave.tres" id="3_6d6ul"]
 [ext_resource type="Script" uid="uid://dgrrrm5nf2bcx" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="3_yutxw"]
-[ext_resource type="PackedScene" uid="uid://7arbusl5a4df" path="res://content/GMTK2026/Enemies/EnemyB/enemy_b.tscn" id="4_6d6ul"]
 [ext_resource type="Script" uid="uid://j1rl8bec286h" path="res://addons/shaker/data/Vector2/ShakerTypeRandom2D.gd" id="4_7bfig"]
 [ext_resource type="Script" uid="uid://balvcdikngibq" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="5_ir85l"]
 [ext_resource type="PackedScene" uid="uid://ci5oivu8iyji8" path="res://content/GMTK2026/Player/Player.tscn" id="5_p7irm"]
 [ext_resource type="Script" uid="uid://cfb8ifkrx5yrp" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="6_w7hgs"]
+[ext_resource type="Resource" uid="uid://crcvin6i0ci8g" path="res://content/GMTK2026/basic_wave.tres" id="9_17t8j"]
 
 [sub_resource type="Resource" id="Resource_qomxq"]
 script = ExtResource("4_7bfig")
@@ -43,7 +42,8 @@ metadata/_custom_type_script = "uid://b3nwtlpygc74r"
 
 [node name="GameState" parent="World" unique_id=1572984397 node_paths=PackedStringArray("wave_spawn_points_root", "split_node_root") instance=ExtResource("1_p7irm")]
 unique_name_in_owner = true
-wave_definition = ExtResource("3_6d6ul")
+starter_wave = ExtResource("3_6d6ul")
+wave_definition = ExtResource("9_17t8j")
 wave_spawn_points_root = NodePath("../LevelRoot/SpawnPositions")
 split_node_root = NodePath("../LevelRoot/Enemies")
 
@@ -87,30 +87,6 @@ position = Vector2(744, 403)
 
 [node name="Enemies" type="Node2D" parent="World/LevelRoot" unique_id=1446069090]
 
-[node name="EnemyA" parent="World/LevelRoot/Enemies" unique_id=920603194 instance=ExtResource("3_u0ef4")]
-position = Vector2(1178, 536)
-
-[node name="EnemyA2" parent="World/LevelRoot/Enemies" unique_id=1974838137 instance=ExtResource("3_u0ef4")]
-position = Vector2(336, 217)
-
-[node name="EnemyA3" parent="World/LevelRoot/Enemies" unique_id=1027404345 instance=ExtResource("3_u0ef4")]
-position = Vector2(1720, 624)
-
-[node name="EnemyA4" parent="World/LevelRoot/Enemies" unique_id=764962410 instance=ExtResource("3_u0ef4")]
-position = Vector2(1365, 1043)
-
-[node name="EnemyB" parent="World/LevelRoot/Enemies" unique_id=637357591 instance=ExtResource("4_6d6ul")]
-position = Vector2(741, 750)
-
-[node name="EnemyB2" parent="World/LevelRoot/Enemies" unique_id=2112967392 instance=ExtResource("4_6d6ul")]
-position = Vector2(433, 645)
-
-[node name="EnemyB3" parent="World/LevelRoot/Enemies" unique_id=618206125 instance=ExtResource("4_6d6ul")]
-position = Vector2(437, 912)
-
-[node name="EnemyB4" parent="World/LevelRoot/Enemies" unique_id=583543532 instance=ExtResource("4_6d6ul")]
-position = Vector2(1780, 115)
-
 [node name="SpawnPositions" type="Node2D" parent="World/LevelRoot" unique_id=921774044]
 
 [node name="Marker2D" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=2123392584]
@@ -133,6 +109,39 @@ position = Vector2(1442, 943)
 
 [node name="Marker2D7" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=910386115]
 position = Vector2(1729, 643)
+
+[node name="Marker2D8" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=1708297039]
+position = Vector2(338, 218)
+
+[node name="Marker2D9" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=588261944]
+position = Vector2(246, 842)
+
+[node name="Marker2D10" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=1427458983]
+position = Vector2(863, 91)
+
+[node name="Marker2D11" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=2034673383]
+position = Vector2(1152, 263)
+
+[node name="Marker2D12" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=1900592958]
+position = Vector2(1574, 65)
+
+[node name="Marker2D13" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=1715294483]
+position = Vector2(1820, 343)
+
+[node name="Marker2D14" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=1095865925]
+position = Vector2(1824, 1020)
+
+[node name="Marker2D15" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=729933532]
+position = Vector2(936, 942)
+
+[node name="Marker2D16" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=1867301643]
+position = Vector2(95, 386)
+
+[node name="Marker2D17" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=761441697]
+position = Vector2(587, 409)
+
+[node name="Marker2D18" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=946735932]
+position = Vector2(947, 441)
 
 [node name="PlayerStart" type="Node2D" parent="World" unique_id=1920689040]
 position = Vector2(960, 540)
@@ -175,18 +184,20 @@ layout_mode = 2
 [node name="GameOverLabel" type="Label" parent="CanvasLayer/GameOverOverlay/Panel/CenterContainer/VBoxContainer" unique_id=1828882653]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 64
 text = "GAME OVER"
 horizontal_alignment = 1
 
 [node name="GameOverRestartButton" type="Button" parent="CanvasLayer/GameOverOverlay/Panel/CenterContainer/VBoxContainer" unique_id=803043815]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Restart"
 
 [node name="GameOverQuitButton" type="Button" parent="CanvasLayer/GameOverOverlay/Panel/CenterContainer/VBoxContainer" unique_id=796921329]
 visible = false
 layout_mode = 2
-text = "Quit to Main Menu"
+theme_override_font_sizes/font_size = 32
+text = "Quit"
 
 [connection signal="game_over" from="World/GameState" to="." method="_on_game_state_game_over"]
 [connection signal="defeated" from="World/PlayerStart/Player" to="World/GameState" method="_on_player_defeated"]

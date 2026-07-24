@@ -18,12 +18,14 @@ func spawn(spawn_root: Node2D, spawn_position_candidates: Array):
 	var wave_id = _next_wave_id
 	_next_wave_id += 1
 	
+	spawn_position_candidates.shuffle()
 	for scene in wave_scenes:
 		var instance := scene.instantiate() as RigidBody2D
 		var collision := instance.get_node("CollisionShape2D") as CollisionShape2D
 		query.shape = collision.shape
 		query.collision_mask = instance.collision_mask
 		
+		var spawned = false
 		for i in range(spawn_position_candidates.size()):
 			var idx = (next_position_idx + i) % spawn_position_candidates.size()
 			if taken_position_idxs.has(idx):
@@ -41,6 +43,8 @@ func spawn(spawn_root: Node2D, spawn_position_candidates: Array):
 				instance.reset_physics_interpolation()
 				wave_cohort.append(instance)
 				next_position_idx = (idx + 1) % spawn_position_candidates.size()
+				spawned = true
+				break
 	
 	for n: Node in wave_cohort:
 		n.tree_exiting.connect(func ():

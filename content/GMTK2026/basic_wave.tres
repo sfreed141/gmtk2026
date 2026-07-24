@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WaveDefinition" format=3 uid="uid://dneh0p6b1knso"]
+[gd_resource type="Resource" script_class="WaveDefinition" format=3 uid="uid://crcvin6i0ci8g"]
 
 [ext_resource type="Script" uid="uid://bf1epdkxlc35t" path="res://content/GMTK2026/wave_definition.gd" id="1_svi7o"]
 [ext_resource type="PackedScene" uid="uid://cbg0xwvkai56i" path="res://content/GMTK2026/Enemies/enemy_a.tscn" id="2_2r753"]
@@ -6,5 +6,5 @@
 
 [resource]
 script = ExtResource("1_svi7o")
-wave_scenes = Array[PackedScene]([ExtResource("2_2r753"), ExtResource("2_2r753"), ExtResource("2_2r753"), ExtResource("2_2r753"), ExtResource("3_ry0x0"), ExtResource("3_ry0x0"), ExtResource("3_ry0x0"), ExtResource("3_ry0x0")])
+wave_scenes = Array[PackedScene]([ExtResource("2_2r753"), ExtResource("2_2r753"), ExtResource("3_ry0x0")])
 metadata/_custom_type_script = "uid://bf1epdkxlc35t"

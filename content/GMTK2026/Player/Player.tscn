@@ -109,13 +109,12 @@ scale_amount_max = 0.19999999
 scale_amount_curve = SubResource("Curve_qmd8u")
 
 [node name="Sprite2D" type="Sprite2D" parent="VisualPivot" unique_id=1187389429]
-position = Vector2(-0.17861594, -0.9026383)
+position = Vector2(-0.17770655, -0.9012313)
 rotation = 1.5707964
 texture = ExtResource("4_wytq3")
 
 [node name="MoveShaker" type="Node2D" parent="VisualPivot/Sprite2D" unique_id=1820010839]
 script = ExtResource("5_kl35h")
-is_playing = true
 AutoPlay = true
 shakerPreset = SubResource("Resource_2uyj2")
 metadata/_custom_type_script = "uid://b3nwtlpygc74r"
