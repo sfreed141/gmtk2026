@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dgrrrm5nf2bcx" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="6_80x3s"]
 [ext_resource type="Texture2D" uid="uid://37l44qogm1pc" path="res://content/Kenney/kenney_space-shooter-remastered/PNG/UI/playerLife2_green.png" id="6_w4hnx"]
 [ext_resource type="Script" uid="uid://j1rl8bec286h" path="res://addons/shaker/data/Vector2/ShakerTypeRandom2D.gd" id="7_8c1it"]
+[ext_resource type="Script" uid="uid://dj5gybgml5exd" path="res://addons/shaker/data/Vector2/ShakerTypeSineWave2D.gd" id="7_80x3s"]
 [ext_resource type="Script" uid="uid://balvcdikngibq" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="8_3fwrr"]
 [ext_resource type="Script" uid="uid://cfb8ifkrx5yrp" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="9_l3dj5"]
 
@@ -20,6 +21,16 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.3717256, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Resource" id="Resource_0kts2"]
+script = ExtResource("7_80x3s")
+amplitude = Vector2(0.415, 1)
+metadata/_custom_type_script = "uid://dj5gybgml5exd"
+
+[sub_resource type="Resource" id="Resource_2uyj2"]
+script = ExtResource("9_l3dj5")
+PositionShake = Array[ExtResource("6_80x3s")]([SubResource("Resource_0kts2")])
+metadata/_custom_type_script = "uid://cfb8ifkrx5yrp"
+
+[sub_resource type="Resource" id="Resource_8c1it"]
 script = ExtResource("7_8c1it")
 metadata/_custom_type_script = "uid://j1rl8bec286h"
 
@@ -30,7 +41,7 @@ metadata/_custom_type_script = "uid://j1rl8bec286h"
 
 [sub_resource type="Resource" id="Resource_dhrd0"]
 script = ExtResource("9_l3dj5")
-PositionShake = Array[ExtResource("6_80x3s")]([SubResource("Resource_0kts2")])
+PositionShake = Array[ExtResource("6_80x3s")]([SubResource("Resource_8c1it")])
 ScaleShake = Array[ExtResource("6_80x3s")]([SubResource("Resource_tyujb")])
 metadata/_custom_type_script = "uid://cfb8ifkrx5yrp"
 
@@ -98,8 +109,16 @@ scale_amount_max = 0.19999999
 scale_amount_curve = SubResource("Curve_qmd8u")
 
 [node name="Sprite2D" type="Sprite2D" parent="VisualPivot" unique_id=1187389429]
+position = Vector2(-0.17861594, -0.9026383)
 rotation = 1.5707964
 texture = ExtResource("4_wytq3")
+
+[node name="MoveShaker" type="Node2D" parent="VisualPivot/Sprite2D" unique_id=1820010839]
+script = ExtResource("5_kl35h")
+is_playing = true
+AutoPlay = true
+shakerPreset = SubResource("Resource_2uyj2")
+metadata/_custom_type_script = "uid://b3nwtlpygc74r"
 
 [node name="BoostShaker" type="Node2D" parent="VisualPivot" unique_id=537155686]
 script = ExtResource("5_kl35h")
