@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bngvkmlaormk1"]
 
 [ext_resource type="Script" uid="uid://d2e22w5lrvjpr" path="res://content/GMTK2026/game_state.gd" id="1_xgowh"]
+[ext_resource type="PackedScene" uid="uid://bevpks5j10qcu" path="res://content/GMTK2026/Components/control_animator_component.tscn" id="2_mbm31"]
 
 [node name="GameState" type="Node" unique_id=1572984397]
 script = ExtResource("1_xgowh")
@@ -17,6 +18,7 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 40.0
 grow_horizontal = 2
+theme_override_constants/margin_top = 32
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=340139132]
 layout_mode = 2
@@ -27,6 +29,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "Split in 0"
+
+[node name="ControlAnimatorComponent" parent="MarginContainer/HBoxContainer/SplitCountdownLabel" unique_id=1893011213 instance=ExtResource("2_mbm31")]
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer" unique_id=2084215371]
 modulate = Color(1, 1, 1, 0)
@@ -39,3 +43,5 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "Wave in 0"
+
+[node name="ControlAnimatorComponent" parent="MarginContainer/HBoxContainer/WaveCountdownLabel" unique_id=1994491730 instance=ExtResource("2_mbm31")]

@@ -53,7 +53,15 @@ func _process(_delta: float) -> void:
 
 static func _update_label(label: Label, time_left: float, fmt: String):
 	var seconds_left = floori(time_left)
+	var new_text = fmt.format([seconds_left])
+	if new_text == label.text:
+		# no need to update label text or check for pulse if time left didn't cross integer boundary
+		return
+	
 	label.text = fmt.format([seconds_left])
+	if seconds_left <= 3:
+		var anim = ControlAnimatorComponent.get_component(label)
+		anim.pulse()
 
 func _on_wave_timeout():
 	if wave_definition:

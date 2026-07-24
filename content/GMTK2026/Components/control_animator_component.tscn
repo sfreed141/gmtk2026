@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bevpks5j10qcu"]
+
+[ext_resource type="Script" uid="uid://d0uvvxh0vtvi4" path="res://content/GMTK2026/Components/control_animator_component.gd" id="1_ulgir"]
+
+[node name="ControlAnimatorComponent" type="Node" unique_id=1893011213]
+script = ExtResource("1_ulgir")
