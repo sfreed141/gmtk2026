@@ -21,6 +21,7 @@ signal hit()
 @onready var _charge_progress_bar: TextureProgressBar = $ChargeProgressBar
 @onready var _hp_container: HBoxContainer = %HPContainer
 @onready var _boost_shaker: ShakerComponent2D = $VisualPivot/BoostShaker
+@onready var _max_hp = hp
 var _look_direction := Vector2.RIGHT
 var _charge_tween: Tween
 var _boost_tween: Tween
@@ -28,6 +29,29 @@ var _charge_start_time_ms: int
 const _CHARGE_MODULATE := Color(5.0, 5.0, 5.0)
 var _hit_bodies: Dictionary
 var _last_hit_time_ms: int
+
+func reset():
+	hp = _max_hp
+	_update_hp_ui()
+
+	if _charge_tween and _charge_tween.is_valid():
+		_charge_tween.kill()
+		_charge_tween = null
+	if _boost_tween and _boost_tween.is_valid():
+		_boost_tween.kill()
+		_boost_tween = null
+	
+	_boost_shaker.force_stop_shake()
+	
+	velocity = Vector2.ZERO
+	position = Vector2.ZERO
+	reset_physics_interpolation()
+	
+	_charge_progress_bar.modulate = Color.TRANSPARENT
+	_sprite.modulate = Color.WHITE
+
+	set_process(true)
+	set_physics_process(true)
 
 func apply_hit(damage: int):
 	var hit_time_ms = Time.get_ticks_msec()
@@ -60,9 +84,9 @@ func _update_hp_ui():
 		for i in range(hp_ui_diff):
 			_hp_container.remove_child(_hp_container.get_child(0))
 	elif hp_ui_diff < 0:
-		var template = _hp_container.get_child(0)
-		for i in hp_ui_diff:
-			_hp_container.add_child(template.duplicate())
+		var template = preload("res://content/GMTK2026/Player/player_hp_ui_chunk.tscn")
+		for i in range(abs(hp_ui_diff)):
+			_hp_container.add_child(template.instantiate())
 
 func _make_charge_tween() -> Tween:
 	var t = create_tween()

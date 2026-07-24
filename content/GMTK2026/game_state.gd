@@ -17,10 +17,25 @@ signal game_over(won: bool)
 @onready var _split_timer: Timer = $SplitTimer
 @onready var _split_countdown_label: Label = %SplitCountdownLabel
 
+var _game_active = false
+
+func reset():
+	_game_active = false
+	clear_enemies()
+	var player = get_tree().get_first_node_in_group("player")
+	player.reset()
+
 func restart():
+	reset()
 	starter_wave.spawn(split_node_root, wave_spawn_points_root.get_children())
 	_wave_timer.start(wave_time)
 	_split_timer.start(split_time)
+	_game_active = true
+
+func clear_enemies():
+	for c in split_node_root.get_children():
+		split_node_root.remove_child(c)
+	
 
 func _ready() -> void:
 	_wave_timer.timeout.connect(_on_wave_timeout)
@@ -30,6 +45,9 @@ func _ready() -> void:
 	split_node_root.child_exiting_tree.connect(_split_node_exiting)
 
 func _process(_delta: float) -> void:
+	if not _game_active:
+		return
+	
 	_update_label(_wave_countdown_label, _wave_timer.time_left, "Wave in {0}")
 	_update_label(_split_countdown_label, _split_timer.time_left, "Split in {0}")
 
@@ -53,7 +71,7 @@ func _on_split_timeout():
 	_split_timer.start(split_time)
 
 func _split_node_exiting(_n):
-	if split_node_root.get_child_count() == 1:
+	if _game_active and split_node_root.get_child_count() == 1:
 		_end_game(true)
 
 func _end_game(won: bool):

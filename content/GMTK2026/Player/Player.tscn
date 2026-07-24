@@ -7,11 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://33hvpsh70ytv" path="res://content/GMTK2026/Components/screen_wrap.tscn" id="5_hp4mr"]
 [ext_resource type="Script" uid="uid://b3nwtlpygc74r" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="5_kl35h"]
 [ext_resource type="Script" uid="uid://dgrrrm5nf2bcx" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="6_80x3s"]
-[ext_resource type="Texture2D" uid="uid://37l44qogm1pc" path="res://content/Kenney/kenney_space-shooter-remastered/PNG/UI/playerLife2_green.png" id="6_w4hnx"]
 [ext_resource type="Script" uid="uid://j1rl8bec286h" path="res://addons/shaker/data/Vector2/ShakerTypeRandom2D.gd" id="7_8c1it"]
 [ext_resource type="Script" uid="uid://dj5gybgml5exd" path="res://addons/shaker/data/Vector2/ShakerTypeSineWave2D.gd" id="7_80x3s"]
 [ext_resource type="Script" uid="uid://balvcdikngibq" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="8_3fwrr"]
 [ext_resource type="Script" uid="uid://cfb8ifkrx5yrp" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="9_l3dj5"]
+[ext_resource type="PackedScene" uid="uid://oy4smx34r8j3" path="res://content/GMTK2026/Player/player_hp_ui_chunk.tscn" id="12_80x3s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dhrd0"]
 radius = 38.052597
@@ -158,32 +158,17 @@ theme_override_constants/margin_bottom = 8
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="HUD/MarginContainer/PanelContainer/MarginContainer/HPContainer" unique_id=155605825]
-custom_minimum_size = Vector2(48, 48)
+[node name="TextureRect" parent="HUD/MarginContainer/PanelContainer/MarginContainer/HPContainer" unique_id=1064272857 instance=ExtResource("12_80x3s")]
 layout_mode = 2
-texture = ExtResource("6_w4hnx")
-expand_mode = 3
 
-[node name="TextureRect2" type="TextureRect" parent="HUD/MarginContainer/PanelContainer/MarginContainer/HPContainer" unique_id=1336828633]
-custom_minimum_size = Vector2(48, 48)
+[node name="TextureRect2" parent="HUD/MarginContainer/PanelContainer/MarginContainer/HPContainer" unique_id=1730276234 instance=ExtResource("12_80x3s")]
 layout_mode = 2
-texture = ExtResource("6_w4hnx")
-expand_mode = 3
 
-[node name="TextureRect3" type="TextureRect" parent="HUD/MarginContainer/PanelContainer/MarginContainer/HPContainer" unique_id=271662998]
-custom_minimum_size = Vector2(48, 48)
+[node name="TextureRect3" parent="HUD/MarginContainer/PanelContainer/MarginContainer/HPContainer" unique_id=346476564 instance=ExtResource("12_80x3s")]
 layout_mode = 2
-texture = ExtResource("6_w4hnx")
-expand_mode = 3
 
-[node name="TextureRect4" type="TextureRect" parent="HUD/MarginContainer/PanelContainer/MarginContainer/HPContainer" unique_id=1188356573]
-custom_minimum_size = Vector2(48, 48)
+[node name="TextureRect4" parent="HUD/MarginContainer/PanelContainer/MarginContainer/HPContainer" unique_id=1800699097 instance=ExtResource("12_80x3s")]
 layout_mode = 2
-texture = ExtResource("6_w4hnx")
-expand_mode = 3
 
-[node name="TextureRect5" type="TextureRect" parent="HUD/MarginContainer/PanelContainer/MarginContainer/HPContainer" unique_id=1009675185]
-custom_minimum_size = Vector2(48, 48)
+[node name="TextureRect5" parent="HUD/MarginContainer/PanelContainer/MarginContainer/HPContainer" unique_id=983518772 instance=ExtResource("12_80x3s")]
 layout_mode = 2
-texture = ExtResource("6_w4hnx")
-expand_mode = 3

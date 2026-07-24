@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://ci5oivu8iyji8" path="res://content/GMTK2026/Player/Player.tscn" id="5_p7irm"]
 [ext_resource type="Script" uid="uid://cfb8ifkrx5yrp" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="6_w7hgs"]
 [ext_resource type="Resource" uid="uid://crcvin6i0ci8g" path="res://content/GMTK2026/basic_wave.tres" id="9_17t8j"]
+[ext_resource type="Script" uid="uid://dng6vp0lago41" path="res://content/GMTK2026/start_game_area.gd" id="13_yutxw"]
+[ext_resource type="Texture2D" uid="uid://6yhwqmidusif" path="res://content/GiantLightStudios_SimpleShapes/circle_outline_sixteenth_256.png" id="14_hgepx"]
 
 [sub_resource type="Resource" id="Resource_qomxq"]
 script = ExtResource("4_7bfig")
@@ -22,8 +24,12 @@ script = ExtResource("6_w7hgs")
 PositionShake = Array[ExtResource("3_yutxw")]([SubResource("Resource_qomxq")])
 metadata/_custom_type_script = "uid://cfb8ifkrx5yrp"
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_dhrd0"]
+radius = 131.00381
+
 [node name="Game" type="Node" unique_id=159096374]
 script = ExtResource("1_e2bs0")
+auto_play_in_debug_build = false
 
 [node name="World" type="Node2D" parent="." unique_id=792346425]
 unique_name_in_owner = true
@@ -85,6 +91,15 @@ centered = false
 [node name="Meteor" parent="World/LevelRoot/Meteors" unique_id=1801966911 instance=ExtResource("2_hxwgx")]
 position = Vector2(744, 403)
 
+[node name="Meteor2" parent="World/LevelRoot/Meteors" unique_id=1743619061 instance=ExtResource("2_hxwgx")]
+position = Vector2(1238, 894)
+
+[node name="Meteor3" parent="World/LevelRoot/Meteors" unique_id=717755948 instance=ExtResource("2_hxwgx")]
+position = Vector2(1516, 501)
+
+[node name="Meteor4" parent="World/LevelRoot/Meteors" unique_id=1472856900 instance=ExtResource("2_hxwgx")]
+position = Vector2(14, 161)
+
 [node name="Enemies" type="Node2D" parent="World/LevelRoot" unique_id=1446069090]
 
 [node name="SpawnPositions" type="Node2D" parent="World/LevelRoot" unique_id=921774044]
@@ -143,10 +158,64 @@ position = Vector2(587, 409)
 [node name="Marker2D18" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=946735932]
 position = Vector2(947, 441)
 
+[node name="Marker2D19" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=522417507]
+position = Vector2(630, 642)
+
+[node name="Marker2D20" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=1831469559]
+position = Vector2(169, 11)
+
+[node name="Marker2D21" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=1536595855]
+position = Vector2(122, 1059)
+
+[node name="Marker2D22" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=74792145]
+position = Vector2(747, 1065)
+
+[node name="Marker2D23" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=1210958845]
+position = Vector2(1892, 785)
+
+[node name="Marker2D24" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=1043181953]
+position = Vector2(1865, 26)
+
+[node name="Marker2D25" type="Marker2D" parent="World/LevelRoot/SpawnPositions" unique_id=1814433372]
+position = Vector2(1222, 1054)
+
 [node name="PlayerStart" type="Node2D" parent="World" unique_id=1920689040]
 position = Vector2(960, 540)
 
 [node name="Player" parent="World/PlayerStart" unique_id=1569980812 instance=ExtResource("5_p7irm")]
+
+[node name="StartGameArea" type="Area2D" parent="World" unique_id=355434169]
+unique_name_in_owner = true
+position = Vector2(947, 304)
+monitorable = false
+script = ExtResource("13_yutxw")
+
+[node name="Timer" type="Timer" parent="World/StartGameArea" unique_id=164374491]
+wait_time = 3.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/StartGameArea" unique_id=1002017365]
+shape = SubResource("CircleShape2D_dhrd0")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/StartGameArea" unique_id=1659841105]
+texture = ExtResource("14_hgepx")
+
+[node name="Node" type="Node" parent="World/StartGameArea" unique_id=1805990883]
+
+[node name="MarginContainer" type="MarginContainer" parent="World/StartGameArea/Node" unique_id=1796458503]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 96
+
+[node name="StartGameCountdownLabel" type="Label" parent="World/StartGameArea/Node/MarginContainer" unique_id=1573387932]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "Enter to start"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1570526261]
 
@@ -194,7 +263,6 @@ theme_override_font_sizes/font_size = 32
 text = "Restart"
 
 [node name="GameOverQuitButton" type="Button" parent="CanvasLayer/GameOverOverlay/Panel/CenterContainer/VBoxContainer" unique_id=796921329]
-visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Quit"
