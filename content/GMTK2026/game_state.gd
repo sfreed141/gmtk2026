@@ -13,9 +13,11 @@ signal game_over(won: bool)
 
 @onready var _wave_timer: Timer = $WaveTimer
 @onready var _wave_countdown_label: Label = %WaveCountdownLabel
+@onready var _wave_countdown_progress_bar: ProgressBar = %WaveCountdownProgressBar
 
 @onready var _split_timer: Timer = $SplitTimer
 @onready var _split_countdown_label: Label = %SplitCountdownLabel
+@onready var _split_countdown_progress_bar: ProgressBar = %SplitCountdownProgressBar
 
 var _game_active = false
 
@@ -48,8 +50,14 @@ func _process(_delta: float) -> void:
 	if not _game_active:
 		return
 	
-	_update_label(_wave_countdown_label, _wave_timer.time_left, "Wave in {0}")
-	_update_label(_split_countdown_label, _split_timer.time_left, "Split in {0}")
+	_update_countdown_ui(_wave_countdown_label, _wave_countdown_progress_bar, wave_time, _wave_timer.time_left, "Wave in {0}")
+	_update_countdown_ui(_split_countdown_label, _split_countdown_progress_bar, split_time, _split_timer.time_left, "Split in {0}")
+
+static func _update_countdown_ui(label: Label, progress_bar: ProgressBar, time_period: float, time_left: float, label_fmt: String):
+	if label:
+		_update_label(label, time_left, label_fmt)
+	if progress_bar:
+		progress_bar.value = progress_bar.max_value * time_left / time_period
 
 static func _update_label(label: Label, time_left: float, fmt: String):
 	var seconds_left = floori(time_left)

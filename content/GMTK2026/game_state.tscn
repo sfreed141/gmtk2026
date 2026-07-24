@@ -3,6 +3,18 @@
 [ext_resource type="Script" uid="uid://d2e22w5lrvjpr" path="res://content/GMTK2026/game_state.gd" id="1_xgowh"]
 [ext_resource type="PackedScene" uid="uid://bevpks5j10qcu" path="res://content/GMTK2026/Components/control_animator_component.tscn" id="2_mbm31"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mbm31"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
 [node name="GameState" type="Node" unique_id=1572984397]
 script = ExtResource("1_xgowh")
 
@@ -23,25 +35,51 @@ theme_override_constants/margin_top = 32
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=340139132]
 layout_mode = 2
 
-[node name="SplitCountdownLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1503705827]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=421555969]
+layout_mode = 2
+
+[node name="SplitCountdownLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1503705827]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "Split in 0"
+horizontal_alignment = 1
 
-[node name="ControlAnimatorComponent" parent="MarginContainer/HBoxContainer/SplitCountdownLabel" unique_id=1893011213 instance=ExtResource("2_mbm31")]
+[node name="ControlAnimatorComponent" parent="MarginContainer/HBoxContainer/VBoxContainer/SplitCountdownLabel" unique_id=1893011213 instance=ExtResource("2_mbm31")]
+
+[node name="SplitCountdownProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=742456880]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_mbm31")
+step = 1.0
+show_percentage = false
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer" unique_id=2084215371]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_constants/separation = 292
 
-[node name="WaveCountdownLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1957743663]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=649749702]
+layout_mode = 2
+
+[node name="WaveCountdownLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1957743663]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "Wave in 0"
+horizontal_alignment = 1
 
-[node name="ControlAnimatorComponent" parent="MarginContainer/HBoxContainer/WaveCountdownLabel" unique_id=1994491730 instance=ExtResource("2_mbm31")]
+[node name="ControlAnimatorComponent" parent="MarginContainer/HBoxContainer/VBoxContainer2/WaveCountdownLabel" unique_id=1994491730 instance=ExtResource("2_mbm31")]
+
+[node name="WaveCountdownProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1492113427]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_mbm31")
+step = 1.0
+show_percentage = false
