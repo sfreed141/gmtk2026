@@ -3,6 +3,7 @@ extends CharacterBody2D
 signal defeated()
 
 @export var hp := 5
+@export var hit_invulnerability_duration: float = 1.
 
 @export var max_speed := 800.0
 @export var acceleration := 4800.0
@@ -24,15 +25,30 @@ var _boost_tween: Tween
 var _charge_start_time_ms: int
 const _CHARGE_MODULATE := Color(5.0, 5.0, 5.0)
 var _hit_bodies: Dictionary
+var _last_hit_time_ms: int
 
 func apply_hit(damage: int):
-	if hp > 0:
+	var hit_time_ms = Time.get_ticks_msec()
+	var last_hit_time = (hit_time_ms - _last_hit_time_ms) / 1000.0
+	if hp > 0 and last_hit_time > hit_invulnerability_duration:
 		hp -= damage
+		_last_hit_time_ms = hit_time_ms
 		_update_hp_ui()
 		if hp <= 0:
 			defeated.emit()
 			set_process(false)
 			set_physics_process(false)
+		else:
+			# hit flash
+			const _FLASH_CYCLES = 4
+			const _FLASH_COLOR = Color(10, 10, 10)
+			var flash_half_period = hit_invulnerability_duration / _FLASH_CYCLES
+			var t = create_tween()
+			t.set_loops(2)
+			t.tween_property(_sprite, "modulate", _FLASH_COLOR, 0)
+			t.tween_interval(flash_half_period)
+			t.tween_property(_sprite, "modulate", Color.WHITE, 0)
+			t.tween_interval(flash_half_period)
 
 func _update_hp_ui():
 	var hp_ui_count = _hp_container.get_child_count()
