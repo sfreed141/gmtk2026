@@ -100,6 +100,12 @@ position = Vector2(1516, 501)
 [node name="Meteor4" parent="World/LevelRoot/Meteors" unique_id=1472856900 instance=ExtResource("2_hxwgx")]
 position = Vector2(14, 161)
 
+[node name="Meteor5" parent="World/LevelRoot/Meteors" unique_id=1641522638 instance=ExtResource("2_hxwgx")]
+position = Vector2(157, 887)
+
+[node name="Meteor6" parent="World/LevelRoot/Meteors" unique_id=526744545 instance=ExtResource("2_hxwgx")]
+position = Vector2(1541, 751)
+
 [node name="Enemies" type="Node2D" parent="World/LevelRoot" unique_id=1446069090]
 
 [node name="SpawnPositions" type="Node2D" parent="World/LevelRoot" unique_id=921774044]
