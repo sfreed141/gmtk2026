@@ -25,7 +25,7 @@ linear_damp = 1.0
 script = ExtResource("1_8o63r")
 split_count = 2
 hp = 1
-speed = 2000
+speed = 3000
 attack_range = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=421862378]

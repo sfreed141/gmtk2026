@@ -66,8 +66,26 @@ position = Vector2(744, 403)
 [node name="EnemyA" parent="World/LevelRoot/Enemies" unique_id=920603194 instance=ExtResource("3_u0ef4")]
 position = Vector2(1178, 536)
 
+[node name="EnemyA2" parent="World/LevelRoot/Enemies" unique_id=1974838137 instance=ExtResource("3_u0ef4")]
+position = Vector2(336, 217)
+
+[node name="EnemyA3" parent="World/LevelRoot/Enemies" unique_id=1027404345 instance=ExtResource("3_u0ef4")]
+position = Vector2(1720, 624)
+
+[node name="EnemyA4" parent="World/LevelRoot/Enemies" unique_id=764962410 instance=ExtResource("3_u0ef4")]
+position = Vector2(1365, 1043)
+
 [node name="EnemyB" parent="World/LevelRoot/Enemies" unique_id=637357591 instance=ExtResource("4_6d6ul")]
 position = Vector2(741, 750)
+
+[node name="EnemyB2" parent="World/LevelRoot/Enemies" unique_id=2112967392 instance=ExtResource("4_6d6ul")]
+position = Vector2(433, 645)
+
+[node name="EnemyB3" parent="World/LevelRoot/Enemies" unique_id=618206125 instance=ExtResource("4_6d6ul")]
+position = Vector2(437, 912)
+
+[node name="EnemyB4" parent="World/LevelRoot/Enemies" unique_id=583543532 instance=ExtResource("4_6d6ul")]
+position = Vector2(1780, 115)
 
 [node name="PlayerStart" type="Node2D" parent="World" unique_id=1920689040]
 position = Vector2(960, 540)
