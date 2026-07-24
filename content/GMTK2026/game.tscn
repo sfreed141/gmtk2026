@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://crcvin6i0ci8g" path="res://content/GMTK2026/basic_wave.tres" id="9_17t8j"]
 [ext_resource type="Script" uid="uid://dng6vp0lago41" path="res://content/GMTK2026/start_game_area.gd" id="13_yutxw"]
 [ext_resource type="Texture2D" uid="uid://6yhwqmidusif" path="res://content/GiantLightStudios_SimpleShapes/circle_outline_sixteenth_256.png" id="14_hgepx"]
+[ext_resource type="PackedScene" uid="uid://bevpks5j10qcu" path="res://content/GMTK2026/Components/control_animator_component.tscn" id="15_hgepx"]
 
 [sub_resource type="Resource" id="Resource_qomxq"]
 script = ExtResource("4_7bfig")
@@ -255,6 +256,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 48
 text = "Enter to start"
+
+[node name="ControlAnimatorComponent" parent="World/StartGameArea/Node/StartAreaUI/MarginContainer/StartGameCountdownLabel" unique_id=1893011213 instance=ExtResource("15_hgepx")]
+pulse_scale = 1.1
 
 [node name="ControlsLabel" type="Label" parent="World/StartGameArea/Node/StartAreaUI/MarginContainer" unique_id=1872659657]
 layout_mode = 2

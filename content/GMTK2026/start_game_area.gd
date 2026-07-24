@@ -52,4 +52,11 @@ func _reset():
 func _update_label():
 	var time_left = floori(_timer.time_left)
 	
-	_start_game_countdown_label.text = "Start in {0}".format([time_left]) if time_left > 0 else "Start!"
+	var new_text = "Start in {0}".format([time_left]) if time_left > 0 else "Start!"
+	if _start_game_countdown_label.text == new_text:
+		return
+	
+	_start_game_countdown_label.text = new_text
+	var anim = ControlAnimatorComponent.get_component(_start_game_countdown_label)
+	anim.pulse()
+	
