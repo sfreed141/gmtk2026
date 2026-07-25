@@ -96,6 +96,34 @@ func _make_charge_tween() -> Tween:
 	t.tween_property(_charge_progress_bar, "value", 100, charge_time)
 	t.tween_property(_charge_progress_bar, "modulate", Color.WHITE, charge_time)
 	return t
+	
+func _release_charge_ability():
+	if _charge_tween and _charge_tween.is_valid():
+		_charge_tween.kill()
+		_charge_tween = null
+	_sprite.modulate = Color.WHITE
+	
+	_boost_tween = create_tween()
+	_boost_tween.tween_property(_charge_progress_bar, "value", 0, 0.2)
+	
+	var charge_duration = (Time.get_ticks_msec() - _charge_start_time_ms) / 1000.0
+	var charge_weight = charge_duration / charge_time
+	
+	const BOOST_SUPER_MARGIN = 0.1
+	if absf(charge_weight - 1.0) < BOOST_SUPER_MARGIN:
+		_charge_progress_bar.modulate = Color.FOREST_GREEN
+		_boost_shaker.intensity = 4
+		_boost_shaker.play_shake()
+	else:
+		_boost_shaker.intensity = 1
+		_boost_shaker.play_shake()
+	
+	var boost_direction = _visual_pivot.global_transform.basis_xform(Vector2.RIGHT)
+	var boost_speed = max_speed * boost_speed_multiplier * min(charge_weight, 1)
+	velocity = boost_direction * boost_speed
+	
+	_boost_particles.restart()
+	_hit_bodies.clear()
 
 func _ready():
 	assert(hp > 0)
@@ -109,30 +137,7 @@ func _physics_process(delta: float) -> void:
 		_charge_start_time_ms = Time.get_ticks_msec()
 	elif Input.is_action_just_released("charge"):
 		# Charge released
-		_charge_tween.kill()
-		_sprite.modulate = Color.WHITE
-		
-		_boost_tween = create_tween()
-		_boost_tween.tween_property(_charge_progress_bar, "value", 0, 0.2)
-		
-		var charge_duration = (Time.get_ticks_msec() - _charge_start_time_ms) / 1000.0
-		var charge_weight = charge_duration / charge_time
-		
-		const BOOST_SUPER_MARGIN = 0.1
-		if absf(charge_weight - 1.0) < BOOST_SUPER_MARGIN:
-			_charge_progress_bar.modulate = Color.FOREST_GREEN
-			_boost_shaker.intensity = 4
-			_boost_shaker.play_shake()
-		else:
-			_boost_shaker.intensity = 1
-			_boost_shaker.play_shake()
-		
-		var boost_direction = _visual_pivot.global_transform.basis_xform(Vector2.RIGHT)
-		var boost_speed = max_speed * boost_speed_multiplier * min(charge_weight, 1)
-		velocity = boost_direction * boost_speed
-		
-		_boost_particles.restart()
-		_hit_bodies.clear()
+		_release_charge_ability()
 	
 	var charging := Input.is_action_pressed("charge")
 	var direction := Input.get_vector("left", "right", "up", "down")
@@ -177,6 +182,7 @@ func _physics_process(delta: float) -> void:
 				if not _hit_bodies.has(body_id):
 					_hit_bodies[body_id] = true
 					body.apply_hit(damage)
+					
 
 func _process(delta: float) -> void:
 	_apply_look(delta)
@@ -196,3 +202,6 @@ func _apply_deceleration(delta: float, half_life: float):
 func _set_look_direction(direction: Vector2):
 	if not direction.is_zero_approx():
 		_look_direction = direction.normalized()
+		
+func _handle_player_death():
+	_release_charge_ability()

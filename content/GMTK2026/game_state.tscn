@@ -60,7 +60,26 @@ show_percentage = false
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer" unique_id=2084215371]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_constants/separation = 292
+theme_override_constants/separation = 50
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=493318168]
+layout_mode = 2
+
+[node name="WaveCountLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer3" unique_id=361753522]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Wave 0"
+horizontal_alignment = 1
+
+[node name="ControlAnimatorComponent" parent="MarginContainer/HBoxContainer/VBoxContainer3/WaveCountLabel" unique_id=852231008 instance=ExtResource("2_mbm31")]
+
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer/HBoxContainer" unique_id=65528998]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 50
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=649749702]
 layout_mode = 2

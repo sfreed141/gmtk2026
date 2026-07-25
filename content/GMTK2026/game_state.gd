@@ -7,13 +7,16 @@ signal game_over(won: bool)
 @export var wave_definition: WaveDefinition
 @export var wave_spawn_points_root: Node
 
+@export var wave_count := 0
+
 @export var split_time := 10
 @export var split_node_root: Node
-
 
 @onready var _wave_timer: Timer = $WaveTimer
 @onready var _wave_countdown_label: Label = %WaveCountdownLabel
 @onready var _wave_countdown_progress_bar: ProgressBar = %WaveCountdownProgressBar
+
+@onready var _wave_count_label: Label = %WaveCountLabel
 
 @onready var _split_timer: Timer = $SplitTimer
 @onready var _split_countdown_label: Label = %SplitCountdownLabel
@@ -30,6 +33,8 @@ func reset():
 func restart():
 	reset()
 	starter_wave.spawn(split_node_root, wave_spawn_points_root.get_children())
+	wave_count = 1;
+	_update_wave_count_label()
 	_wave_timer.start(wave_time)
 	_split_timer.start(split_time)
 	_game_active = true
@@ -78,6 +83,14 @@ func _on_wave_timeout():
 			split_node_root,
 			wave_spawn_points_root.get_children()
 		)
+		
+		wave_count += 1;
+		_update_wave_count_label()
+		
+func _update_wave_count_label():
+	_wave_count_label.text = "Wave {0}".format([wave_count])
+	var anim = ControlAnimatorComponent.get_component(_wave_count_label)
+	anim.pulse()
 
 func _on_split_timeout():
 	var splittable = split_node_root.get_children()
@@ -94,6 +107,9 @@ func _end_game(won: bool):
 	game_over.emit(won)
 	_split_timer.stop()
 	_wave_timer.stop()
+	
+	var player = get_tree().get_first_node_in_group("player")
+	player._handle_player_death()
 
 func _on_player_defeated() -> void:
 	_end_game(false)

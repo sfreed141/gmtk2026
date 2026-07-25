@@ -29,11 +29,13 @@ metadata/_custom_type_script = "uid://cfb8ifkrx5yrp"
 radius = 131.00381
 
 [node name="Game" type="Node" unique_id=159096374]
+process_mode = 3
 script = ExtResource("1_e2bs0")
 auto_play_in_debug_build = false
 
 [node name="World" type="Node2D" parent="." unique_id=792346425]
 unique_name_in_owner = true
+process_mode = 1
 
 [node name="Camera2D" type="Camera2D" parent="World" unique_id=319467351]
 position = Vector2(960.0031, 540.0021)
@@ -284,8 +286,9 @@ and reinforcements arrive periodically."
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1570526261]
 
-[node name="GameOverOverlay" type="Control" parent="CanvasLayer" unique_id=1185634023]
+[node name="MenuOverlay" type="Control" parent="CanvasLayer" unique_id=1185634023]
 unique_name_in_owner = true
+process_mode = 3
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -294,7 +297,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="CanvasLayer/GameOverOverlay" unique_id=2004257500]
+[node name="Panel" type="Panel" parent="CanvasLayer/MenuOverlay" unique_id=2004257500]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -302,7 +305,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/GameOverOverlay/Panel" unique_id=428042907]
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/MenuOverlay/Panel" unique_id=428042907]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -312,22 +315,27 @@ offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameOverOverlay/Panel/CenterContainer" unique_id=847845202]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MenuOverlay/Panel/CenterContainer" unique_id=847845202]
 layout_mode = 2
 
-[node name="GameOverLabel" type="Label" parent="CanvasLayer/GameOverOverlay/Panel/CenterContainer/VBoxContainer" unique_id=1828882653]
+[node name="GameOverLabel" type="Label" parent="CanvasLayer/MenuOverlay/Panel/CenterContainer/VBoxContainer" unique_id=1828882653]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "GAME OVER"
 horizontal_alignment = 1
 
-[node name="GameOverRestartButton" type="Button" parent="CanvasLayer/GameOverOverlay/Panel/CenterContainer/VBoxContainer" unique_id=803043815]
+[node name="RestartButton" type="Button" parent="CanvasLayer/MenuOverlay/Panel/CenterContainer/VBoxContainer" unique_id=803043815]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Restart"
 
-[node name="GameOverQuitButton" type="Button" parent="CanvasLayer/GameOverOverlay/Panel/CenterContainer/VBoxContainer" unique_id=796921329]
+[node name="IntroLevel" type="Button" parent="CanvasLayer/MenuOverlay/Panel/CenterContainer/VBoxContainer" unique_id=1685222914]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Intro Level"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/MenuOverlay/Panel/CenterContainer/VBoxContainer" unique_id=796921329]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Quit"
@@ -335,5 +343,6 @@ text = "Quit"
 [connection signal="game_over" from="World/GameState" to="." method="_on_game_state_game_over"]
 [connection signal="defeated" from="World/PlayerStart/Player" to="World/GameState" method="_on_player_defeated"]
 [connection signal="hit" from="World/PlayerStart/Player" to="World/Camera2D/ShakerComponent2D" method="play_shake"]
-[connection signal="pressed" from="CanvasLayer/GameOverOverlay/Panel/CenterContainer/VBoxContainer/GameOverRestartButton" to="." method="_on_game_over_restart_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/GameOverOverlay/Panel/CenterContainer/VBoxContainer/GameOverQuitButton" to="." method="_on_game_over_quit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuOverlay/Panel/CenterContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuOverlay/Panel/CenterContainer/VBoxContainer/IntroLevel" to="." method="_on_intro_level_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuOverlay/Panel/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
