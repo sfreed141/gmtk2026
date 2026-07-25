@@ -291,8 +291,8 @@ size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 24
 text = "Controls
 
-Move: WASD/Joystick
-Charge: Hold Spacebar/Gamepad A
+Move: WASD or Joystick
+Charge: Hold LMB, Spacebar, or Gamepad A
 
 Release Charge to Boost.
 Time it right for a Superboost!"

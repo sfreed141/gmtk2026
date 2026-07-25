@@ -163,7 +163,10 @@ func _physics_process(delta: float) -> void:
 	if charging:
 		_apply_deceleration(delta, charge_deceleration_half_life)
 		
-		if direction:
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			var to_mouse = get_global_mouse_position() - global_position
+			_set_look_direction(to_mouse)
+		elif direction:
 			_set_look_direction(direction)
 	else:
 		if direction:
@@ -229,6 +232,6 @@ func _apply_deceleration(delta: float, half_life: float):
 func _set_look_direction(direction: Vector2):
 	if not direction.is_zero_approx():
 		_look_direction = direction.normalized()
-		
+
 func _handle_player_death():
 	_release_charge_ability()
