@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dbjm31lllutoe"]
+
+[ext_resource type="Script" uid="uid://btikcyr58ycpp" path="res://content/GMTK2026/volume_slider.gd" id="1_ei1qq"]
+
+[node name="MusicVolumeSlider" type="HSlider" unique_id=2043739647]
+custom_minimum_size = Vector2(256, 0)
+size_flags_horizontal = 10
+size_flags_vertical = 4
+tick_count = 5
+ticks_on_borders = true
+ticks_position = 3
+script = ExtResource("1_ei1qq")

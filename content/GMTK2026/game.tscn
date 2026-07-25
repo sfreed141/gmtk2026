@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://dng6vp0lago41" path="res://content/GMTK2026/start_game_area.gd" id="13_yutxw"]
 [ext_resource type="Texture2D" uid="uid://6yhwqmidusif" path="res://content/GiantLightStudios_SimpleShapes/circle_outline_sixteenth_256.png" id="14_hgepx"]
 [ext_resource type="PackedScene" uid="uid://bevpks5j10qcu" path="res://content/GMTK2026/Components/control_animator_component.tscn" id="15_hgepx"]
+[ext_resource type="PackedScene" uid="uid://dbjm31lllutoe" path="res://content/GMTK2026/volume_slider.tscn" id="19_o0pkb"]
 
 [sub_resource type="Resource" id="Resource_qomxq"]
 script = ExtResource("4_7bfig")
@@ -43,11 +44,13 @@ crossfade_duration = 1.0
 
 [node name="MenuMusicPlayer" type="AudioStreamPlayer" parent="MusicController" unique_id=1499761237]
 stream = ExtResource("2_w7hgs")
+volume_db = -6.0
 bus = &"Music"
 parameters/looping = true
 
 [node name="BattleMusicPlayer" type="AudioStreamPlayer" parent="MusicController" unique_id=171486363]
 stream = ExtResource("3_qomxq")
+volume_db = -6.0
 bus = &"Music"
 parameters/looping = true
 
@@ -303,6 +306,42 @@ text = "Your Mission
 Defeat all enemies.
 Existing enemies split
 and reinforcements arrive periodically."
+
+[node name="VolumeSliders" type="GridContainer" parent="World/StartGameArea/Node/StartAreaUI/MarginContainer" unique_id=1295842808]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+columns = 2
+
+[node name="MasterVolumeLabel" type="Label" parent="World/StartGameArea/Node/StartAreaUI/MarginContainer/VolumeSliders" unique_id=1278805822]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Master Volume"
+
+[node name="MasterVolumeSlider" parent="World/StartGameArea/Node/StartAreaUI/MarginContainer/VolumeSliders" unique_id=2043739647 instance=ExtResource("19_o0pkb")]
+unique_name_in_owner = true
+layout_mode = 2
+bus_name = "Master"
+
+[node name="MusicVolumeLabel" type="Label" parent="World/StartGameArea/Node/StartAreaUI/MarginContainer/VolumeSliders" unique_id=1456914830]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Music Volume"
+
+[node name="MusicVolumeSlider" parent="World/StartGameArea/Node/StartAreaUI/MarginContainer/VolumeSliders" unique_id=1013147692 instance=ExtResource("19_o0pkb")]
+unique_name_in_owner = true
+layout_mode = 2
+bus_name = "Music"
+
+[node name="SfxVolumeLabel" type="Label" parent="World/StartGameArea/Node/StartAreaUI/MarginContainer/VolumeSliders" unique_id=1277194240]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "SFX Volume"
+
+[node name="SfxVolumeSlider" parent="World/StartGameArea/Node/StartAreaUI/MarginContainer/VolumeSliders" unique_id=1204101059 instance=ExtResource("19_o0pkb")]
+unique_name_in_owner = true
+layout_mode = 2
+bus_name = "SFX"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1570526261]
 
