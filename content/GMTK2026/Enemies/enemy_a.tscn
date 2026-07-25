@@ -48,6 +48,8 @@ gravity_scale = 0.0
 linear_damp = 2.0
 script = ExtResource("1_3etdh")
 splits_into = ExtResource("2_op6rf")
+split_count = 6
+hp = 2
 attack_color = Color(0.73333335, 0.42352942, 0.18039216, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=46363109]

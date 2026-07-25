@@ -13,6 +13,7 @@ signal hit()
 
 @export var charge_time := 1.0
 @export var boost_speed_multiplier := 3.0
+@export var boost_super_speed_multiplier := 6.0
 
 
 @onready var _visual_pivot: Node2D = $VisualPivot
@@ -120,7 +121,9 @@ func _release_charge_ability():
 	var charge_weight = charge_duration / charge_time
 	
 	const BOOST_SUPER_MARGIN = 0.1
+	var speed_multiplier = boost_speed_multiplier
 	if absf(charge_weight - 1.0) < BOOST_SUPER_MARGIN:
+		speed_multiplier = boost_super_speed_multiplier
 		_charge_progress_bar.modulate = Color.FOREST_GREEN
 		_boost_shaker.intensity = 4
 		_boost_shaker.play_shake()
@@ -131,7 +134,7 @@ func _release_charge_ability():
 		$SFX/ChargeRelease.play()
 	
 	var boost_direction = _visual_pivot.global_transform.basis_xform(Vector2.RIGHT)
-	var boost_speed = max_speed * boost_speed_multiplier * min(charge_weight, 1)
+	var boost_speed = max_speed * speed_multiplier * min(charge_weight, 1)
 	velocity = boost_direction * boost_speed
 	
 	_boost_particles.restart()
@@ -169,7 +172,7 @@ func _physics_process(delta: float) -> void:
 		elif direction:
 			_set_look_direction(direction)
 	else:
-		if direction:
+		if direction and velocity.length() < max_speed:
 			if not $SFX/Moving.playing:
 				$SFX/Moving.play()
 			
@@ -203,7 +206,7 @@ func _physics_process(delta: float) -> void:
 				var super_boost_multiplier := 4. if super_boosting else 1.
 				damage = 3 if super_boosting else 1
 				
-				var impulse := impact_velocity * 0.8 * super_boost_multiplier
+				var impulse := impact_velocity * super_boost_multiplier
 				var collision_point = collision.get_position() - body.global_position
 				body.apply_impulse(impulse, collision_point)
 			

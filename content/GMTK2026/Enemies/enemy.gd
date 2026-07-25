@@ -38,13 +38,13 @@ func _ready():
 
 func apply_hit(damage: int):
 	hp -= damage
-	_shaker_component.play_shake()
 	if hp <= 0:
 		$SFX/Defeated.play()
 		hide()
 		await $SFX/Defeated.finished
 		queue_free()
 	else:
+		_shaker_component.play_shake()
 		$SFX/Damaged.play_sfx()
 
 func _get_split_instance() -> RigidBody2D:
