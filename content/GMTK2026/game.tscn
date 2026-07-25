@@ -392,7 +392,7 @@ text = "Try Again"
 [node name="IntroLevel" type="Button" parent="CanvasLayer/MenuOverlay/Panel/CenterContainer/VBoxContainer" unique_id=1685222914]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Intro Level"
+text = "Back to Intro"
 
 [node name="QuitButton" type="Button" parent="CanvasLayer/MenuOverlay/Panel/CenterContainer/VBoxContainer" unique_id=796921329]
 unique_name_in_owner = true
