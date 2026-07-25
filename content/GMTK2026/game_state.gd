@@ -29,14 +29,21 @@ func reset():
 	clear_enemies()
 	var player = get_tree().get_first_node_in_group("player")
 	player.reset()
+	
+	_split_timer.stop()
+	_wave_timer.stop()
+	_update_countdown_ui(_wave_countdown_label, _wave_countdown_progress_bar, wave_time, _wave_timer.time_left, "Wave in {0}")
+	_update_countdown_ui(_split_countdown_label, _split_countdown_progress_bar, split_time, _split_timer.time_left, "Split in {0}")
+
+	wave_count = 1;
+	_update_wave_count_label()
 
 func restart():
 	reset()
 	starter_wave.spawn(split_node_root, wave_spawn_points_root.get_children())
-	wave_count = 1;
-	_update_wave_count_label()
 	_wave_timer.start(wave_time)
 	_split_timer.start(split_time)
+
 	_game_active = true
 
 func clear_enemies():

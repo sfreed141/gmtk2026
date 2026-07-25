@@ -110,7 +110,7 @@ centered = false
 [node name="Meteors" type="Node2D" parent="World/LevelRoot" unique_id=491909470]
 
 [node name="Meteor" parent="World/LevelRoot/Meteors" unique_id=1801966911 instance=ExtResource("2_hxwgx")]
-position = Vector2(744, 403)
+position = Vector2(659, 583)
 
 [node name="Meteor2" parent="World/LevelRoot/Meteors" unique_id=1743619061 instance=ExtResource("2_hxwgx")]
 position = Vector2(1238, 894)
@@ -207,7 +207,7 @@ position = Vector2(1865, 26)
 position = Vector2(1222, 1054)
 
 [node name="PlayerStart" type="Node2D" parent="World" unique_id=1920689040]
-position = Vector2(960, 540)
+position = Vector2(947, 682)
 
 [node name="Player" parent="World/PlayerStart" unique_id=1569980812 instance=ExtResource("5_p7irm")]
 
@@ -221,10 +221,12 @@ script = ExtResource("13_yutxw")
 wait_time = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/StartGameArea" unique_id=1002017365]
+position = Vector2(0, 42)
 shape = SubResource("CircleShape2D_dhrd0")
 
 [node name="Sprite2D" type="Sprite2D" parent="World/StartGameArea" unique_id=1659841105]
 modulate = Color(1, 1, 1, 0.2509804)
+position = Vector2(0, 42)
 texture = ExtResource("14_hgepx")
 
 [node name="Node" type="Node" parent="World/StartGameArea" unique_id=1805990883]
@@ -247,9 +249,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -141.0
-offset_top = -364.0
+offset_top = -322.0
 offset_right = 115.0
-offset_bottom = -108.0
+offset_bottom = -66.0
 grow_horizontal = 2
 grow_vertical = 2
 value = 24.0
@@ -265,7 +267,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 96
-theme_override_constants/margin_top = 96
+theme_override_constants/margin_top = 128
 theme_override_constants/margin_right = 96
 theme_override_constants/margin_bottom = 96
 
