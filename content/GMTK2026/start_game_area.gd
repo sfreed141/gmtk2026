@@ -33,9 +33,9 @@ func _notification(what: int) -> void:
 
 func _on_body_entered(body: Node2D):
 	if body.is_in_group("player"):
-		_update_label()
 		_start_game_countdown_label.show()
-		_timer.start()
+		_timer.start(time_to_start)
+		_update_label()
 
 func _on_body_exited(body: Node2D):
 	if body.is_in_group("player"):
@@ -60,3 +60,7 @@ func _update_label():
 	var anim = ControlAnimatorComponent.get_component(_start_game_countdown_label)
 	anim.pulse()
 	
+	if time_left == 0:
+		$SFX/CountdownFinal.play()
+	else:
+		$SFX/Countdown.play()

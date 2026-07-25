@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://d2e22w5lrvjpr" path="res://content/GMTK2026/game_state.gd" id="1_xgowh"]
 [ext_resource type="PackedScene" uid="uid://bevpks5j10qcu" path="res://content/GMTK2026/Components/control_animator_component.tscn" id="2_mbm31"]
+[ext_resource type="AudioStream" uid="uid://d0pn8qwnpo8fh" path="res://content/GMTK2026/Audio/zap1-shortened.ogg" id="2_rjds7"]
+[ext_resource type="AudioStream" uid="uid://c60isy8m8f4aj" path="res://content/GMTK2026/Audio/zap1-shortened-octave.ogg" id="3_d1gl2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mbm31"]
 content_margin_left = 2.0
@@ -17,6 +19,18 @@ corner_detail = 6
 
 [node name="GameState" type="Node" unique_id=1572984397]
 script = ExtResource("1_xgowh")
+
+[node name="SFX" type="Node" parent="." unique_id=356681781]
+
+[node name="Countdown" type="AudioStreamPlayer" parent="SFX" unique_id=1174392373]
+stream = ExtResource("2_rjds7")
+volume_db = -6.0
+bus = &"SFX"
+
+[node name="CountdownFinal" type="AudioStreamPlayer" parent="SFX" unique_id=1094269211]
+stream = ExtResource("3_d1gl2")
+volume_db = -6.0
+bus = &"SFX"
 
 [node name="WaveTimer" type="Timer" parent="." unique_id=1721995503]
 

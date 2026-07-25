@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://6yhwqmidusif" path="res://content/GiantLightStudios_SimpleShapes/circle_outline_sixteenth_256.png" id="14_hgepx"]
 [ext_resource type="PackedScene" uid="uid://bevpks5j10qcu" path="res://content/GMTK2026/Components/control_animator_component.tscn" id="15_hgepx"]
 [ext_resource type="PackedScene" uid="uid://dbjm31lllutoe" path="res://content/GMTK2026/volume_slider.tscn" id="19_o0pkb"]
+[ext_resource type="AudioStream" uid="uid://d0pn8qwnpo8fh" path="res://content/GMTK2026/Audio/zap1-shortened.ogg" id="20_j2udq"]
+[ext_resource type="AudioStream" uid="uid://c60isy8m8f4aj" path="res://content/GMTK2026/Audio/zap1-shortened-octave.ogg" id="21_llg4c"]
 
 [sub_resource type="Resource" id="Resource_qomxq"]
 script = ExtResource("4_7bfig")
@@ -221,7 +223,6 @@ monitorable = false
 script = ExtResource("13_yutxw")
 
 [node name="Timer" type="Timer" parent="World/StartGameArea" unique_id=164374491]
-wait_time = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/StartGameArea" unique_id=1002017365]
 position = Vector2(0, 42)
@@ -342,6 +343,18 @@ text = "SFX Volume"
 unique_name_in_owner = true
 layout_mode = 2
 bus_name = "SFX"
+
+[node name="SFX" type="Node" parent="World/StartGameArea" unique_id=585842069]
+
+[node name="Countdown" type="AudioStreamPlayer" parent="World/StartGameArea/SFX" unique_id=1189849059]
+stream = ExtResource("20_j2udq")
+volume_db = -6.0
+bus = &"SFX"
+
+[node name="CountdownFinal" type="AudioStreamPlayer" parent="World/StartGameArea/SFX" unique_id=749940239]
+stream = ExtResource("21_llg4c")
+volume_db = -6.0
+bus = &"SFX"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1570526261]
 

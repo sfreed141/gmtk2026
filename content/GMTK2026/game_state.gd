@@ -65,13 +65,13 @@ func _process(_delta: float) -> void:
 	_update_countdown_ui(_wave_countdown_label, _wave_countdown_progress_bar, wave_time, _wave_timer.time_left, "Wave in {0}")
 	_update_countdown_ui(_split_countdown_label, _split_countdown_progress_bar, split_time, _split_timer.time_left, "Split in {0}")
 
-static func _update_countdown_ui(label: Label, progress_bar: ProgressBar, time_period: float, time_left: float, label_fmt: String):
+func _update_countdown_ui(label: Label, progress_bar: ProgressBar, time_period: float, time_left: float, label_fmt: String):
 	if label:
 		_update_label(label, time_left, label_fmt)
 	if progress_bar:
 		progress_bar.value = progress_bar.max_value * time_left / time_period
 
-static func _update_label(label: Label, time_left: float, fmt: String):
+func _update_label(label: Label, time_left: float, fmt: String):
 	var seconds_left = floori(time_left)
 	var new_text = fmt.format([seconds_left])
 	if new_text == label.text:
@@ -82,6 +82,12 @@ static func _update_label(label: Label, time_left: float, fmt: String):
 	if seconds_left <= 3:
 		var anim = ControlAnimatorComponent.get_component(label)
 		anim.pulse()
+		
+		if seconds_left == 0:
+			$SFX/Countdown.stop()
+			$SFX/CountdownFinal.play()
+		elif not $SFX/CountdownFinal.playing and not $SFX/Countdown.playing:
+			$SFX/Countdown.play()
 
 func _on_wave_timeout():
 	if wave_definition:
