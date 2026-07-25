@@ -41,6 +41,8 @@ func apply_hit(damage: int):
 	if hp <= 0:
 		$SFX/Defeated.play()
 		hide()
+		if _attack_tween:
+			_attack_tween.kill()
 		await $SFX/Defeated.finished
 		queue_free()
 	else:
@@ -91,6 +93,7 @@ func _physics_process(_delta: float) -> void:
 	if not _attacking and to_chase_target.length() < attack_range:
 		_attack()
 
+var _attack_tween: Tween
 func _attack():
 	assert(not _attacking)
 	_attacking = true
@@ -103,15 +106,15 @@ func _attack():
 	var telegraph_color = attack_color
 	telegraph_color.a = 0.4
 	
-	var t = create_tween()
+	_attack_tween = create_tween()
 	# telegraph
-	t.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
-	t.tween_property(_attack_sprite, "modulate", telegraph_color, attack_telegraph_time)
+	_attack_tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+	_attack_tween.tween_property(_attack_sprite, "modulate", telegraph_color, attack_telegraph_time)
 	# impact
-	t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	t.tween_property(_attack_sprite, "modulate", attack_color, attack_impact_time)
-	t.parallel().tween_property(_attack_sprite, "scale", initial_sprite_scale * 1.1, attack_impact_time)
-	t.tween_callback(func ():
+	_attack_tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	_attack_tween.tween_property(_attack_sprite, "modulate", attack_color, attack_impact_time)
+	_attack_tween.parallel().tween_property(_attack_sprite, "scale", initial_sprite_scale * 1.1, attack_impact_time)
+	_attack_tween.tween_callback(func ():
 		_shaker_component.play_shake()
 		$SFX/AttackHit.play()
 		var bodies = _attack_area.get_overlapping_bodies()
@@ -120,10 +123,10 @@ func _attack():
 				b.apply_hit(attack_damage)
 	)
 	# recovery
-	t.tween_property(_attack_sprite, "scale", initial_sprite_scale * 0.9, attack_recovery_time)
-	t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-	t.parallel().tween_property(_attack_sprite, "modulate", Color.TRANSPARENT, attack_recovery_time)
-	t.tween_callback(func ():
+	_attack_tween.tween_property(_attack_sprite, "scale", initial_sprite_scale * 0.9, attack_recovery_time)
+	_attack_tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	_attack_tween.parallel().tween_property(_attack_sprite, "modulate", Color.TRANSPARENT, attack_recovery_time)
+	_attack_tween.tween_callback(func ():
 		_attack_sprite.hide()
 		_attack_sprite.scale = initial_sprite_scale
 		_attacking = false
