@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://balvcdikngibq" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="9_oxhki"]
 [ext_resource type="Script" uid="uid://cfb8ifkrx5yrp" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="10_0l5s6"]
 [ext_resource type="PackedScene" uid="uid://wbv4binms11i" path="res://content/GMTK2026/Enemies/enemy_sfx.tscn" id="11_ycji6"]
+[ext_resource type="Texture2D" uid="uid://ddum7r1itvicq" path="res://content/GiantLightStudios_SimpleShapes/square_64.png" id="12_dk7pl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2uyj2"]
 radius = 90.13878
@@ -39,6 +40,13 @@ script = ExtResource("10_0l5s6")
 PositionShake = Array[ExtResource("7_wkj3d")]([SubResource("Resource_0kts2")])
 ScaleShake = Array[ExtResource("7_wkj3d")]([SubResource("Resource_tyujb")])
 metadata/_custom_type_script = "uid://cfb8ifkrx5yrp"
+
+[sub_resource type="Gradient" id="Gradient_2uyj2"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_lup7f"]
+offsets = PackedFloat32Array(0.55153203, 0.75487465)
+colors = PackedColorArray(0.73333335, 0.42352942, 0.18039216, 1, 1, 1, 1, 1)
 
 [node name="EnemyA" type="RigidBody2D" unique_id=920603194 groups=["split"]]
 position = Vector2(2.8647482e-06, -3.091991e-07)
@@ -100,3 +108,23 @@ shakerPreset = SubResource("Resource_dhrd0")
 metadata/_custom_type_script = "uid://b3nwtlpygc74r"
 
 [node name="SFX" parent="." unique_id=194446341 instance=ExtResource("11_ycji6")]
+
+[node name="DeathParticles" type="CPUParticles2D" parent="." unique_id=1016632286]
+emitting = false
+amount = 32
+texture = ExtResource("12_dk7pl")
+lifetime = 2.5
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 25.13
+initial_velocity_max = 276.39
+angular_velocity_min = -180.9
+angular_velocity_max = 144.72
+damping_min = 100.0
+damping_max = 100.0
+scale_amount_min = 0.25
+scale_amount_max = 0.6
+color_ramp = SubResource("Gradient_2uyj2")
+color_initial_ramp = SubResource("Gradient_lup7f")

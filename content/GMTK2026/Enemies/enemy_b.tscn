@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://balvcdikngibq" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="8_jhowh"]
 [ext_resource type="Script" uid="uid://cfb8ifkrx5yrp" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="9_hkbf8"]
 [ext_resource type="PackedScene" uid="uid://wbv4binms11i" path="res://content/GMTK2026/Enemies/enemy_sfx.tscn" id="10_8yvap"]
+[ext_resource type="Texture2D" uid="uid://ddum7r1itvicq" path="res://content/GiantLightStudios_SimpleShapes/square_64.png" id="11_0lqa1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e2bs0"]
 radius = 45.17743
@@ -38,6 +39,13 @@ script = ExtResource("9_hkbf8")
 PositionShake = Array[ExtResource("6_iia3i")]([SubResource("Resource_0kts2")])
 ScaleShake = Array[ExtResource("6_iia3i")]([SubResource("Resource_tyujb")])
 metadata/_custom_type_script = "uid://cfb8ifkrx5yrp"
+
+[sub_resource type="Gradient" id="Gradient_2j8y0"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_gd14u"]
+offsets = PackedFloat32Array(0.55153203, 0.75487465)
+colors = PackedColorArray(0.73333335, 0.42352942, 0.18039216, 1, 1, 1, 1, 1)
 
 [node name="EnemyB" type="RigidBody2D" unique_id=637357591 groups=["split"]]
 mass = 10.0
@@ -96,3 +104,23 @@ shakerPreset = SubResource("Resource_tab7w")
 metadata/_custom_type_script = "uid://b3nwtlpygc74r"
 
 [node name="SFX" parent="." unique_id=194446341 instance=ExtResource("10_8yvap")]
+
+[node name="DeathParticles" type="CPUParticles2D" parent="." unique_id=1253811062]
+emitting = false
+amount = 32
+texture = ExtResource("11_0lqa1")
+lifetime = 2.5
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 25.13
+initial_velocity_max = 276.39
+angular_velocity_min = -180.9
+angular_velocity_max = 144.72
+damping_min = 100.0
+damping_max = 100.0
+scale_amount_min = 0.1
+scale_amount_max = 0.25
+color_ramp = SubResource("Gradient_2j8y0")
+color_initial_ramp = SubResource("Gradient_gd14u")

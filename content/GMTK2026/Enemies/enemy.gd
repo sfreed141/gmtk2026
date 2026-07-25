@@ -28,7 +28,7 @@ var _max_hp
 var _attacking = false
 var _split_generation = 1
 
-func _defeated():
+func is_defeated():
 	return hp <= 0
 
 func _ready():
@@ -43,11 +43,15 @@ func apply_hit(damage: int):
 	hp -= damage
 	if hp <= 0:
 		$SFX/Defeated.play()
-		hide()
+		$DeathParticles.emitting = true
+		$Sprite2D.hide()
+		_attack_sprite.hide()
+		$UI.hide()
 		$CollisionShape2D.disabled = true
 		if _attack_tween:
 			_attack_tween.kill()
 		await $SFX/Defeated.finished
+		await $DeathParticles.finished
 		queue_free()
 	else:
 		_shaker_component.play_shake()
@@ -62,7 +66,7 @@ func _get_split_instance() -> RigidBody2D:
 		return instance
 
 func split():
-	if _defeated() or _split_generation >= _MAX_SPLIT_GENERATION:
+	if is_defeated() or _split_generation >= _MAX_SPLIT_GENERATION:
 		return
 	
 	for i in split_count:
@@ -88,7 +92,7 @@ func _process(_delta: float) -> void:
 	_hp_bar.value = hp
 
 func _physics_process(_delta: float) -> void:
-	if _defeated():
+	if is_defeated():
 		return
 	
 	var to_chase_target = _chase_target.global_position - global_position
