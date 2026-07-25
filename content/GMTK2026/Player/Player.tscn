@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://dftr1plofrsl3" path="res://content/Kenney/kenney_sci-fi-sounds/Audio/laserLarge_002.ogg" id="15_uvnbg"]
 [ext_resource type="AudioStream" uid="uid://ddchk0lo0f8c0" path="res://content/Kenney/kenney_sci-fi-sounds/Audio/explosionCrunch_001.ogg" id="16_6g3qu"]
 [ext_resource type="AudioStream" uid="uid://cop0e1tj783x4" path="res://content/Kenney/kenney_impact-sounds/Audio/impactWood_heavy_000.ogg" id="19_6g3qu"]
+[ext_resource type="Texture2D" uid="uid://ddum7r1itvicq" path="res://content/GiantLightStudios_SimpleShapes/square_64.png" id="20_sreuy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dhrd0"]
 radius = 38.052597
@@ -51,6 +52,10 @@ script = ExtResource("9_l3dj5")
 PositionShake = Array[ExtResource("6_80x3s")]([SubResource("Resource_8c1it")])
 ScaleShake = Array[ExtResource("6_80x3s")]([SubResource("Resource_tyujb")])
 metadata/_custom_type_script = "uid://cfb8ifkrx5yrp"
+
+[sub_resource type="Gradient" id="Gradient_dhrd0"]
+offsets = PackedFloat32Array(0, 0.13370474, 0.21169916, 0.37604457, 1)
+colors = PackedColorArray(1, 0.8377727, 0.28297502, 1, 1, 0.2616545, 0.14486825, 0.908078, 0.46711743, 0.14754258, 0.14754258, 0.7921569, 0.2691166, 0.2691166, 0.2691166, 0.62700754, 0, 0, 0, 0)
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1569980812 groups=["player"]]
 motion_mode = 1
@@ -220,3 +225,22 @@ bus = &"SFX"
 [node name="Impact" type="AudioStreamPlayer2D" parent="SFX" unique_id=624865375]
 stream = ExtResource("19_6g3qu")
 bus = &"SFX"
+
+[node name="DeathParticles" type="CPUParticles2D" parent="." unique_id=243542176]
+emitting = false
+amount = 256
+texture = ExtResource("20_sreuy")
+lifetime = 3.9799999999999995
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.12
+initial_velocity_max = 718.6
+angular_velocity_min = -108.55
+angular_velocity_max = 132.6
+damping_min = 73.869
+damping_max = 73.869
+scale_amount_min = 0.0
+scale_amount_max = 0.6
+color_ramp = SubResource("Gradient_dhrd0")

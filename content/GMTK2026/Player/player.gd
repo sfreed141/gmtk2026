@@ -53,7 +53,7 @@ func reset():
 
 	set_process(true)
 	set_physics_process(true)
-	
+	$VisualPivot.show()
 	_charge_start_time_ms = -1
 	
 	for sfx in $SFX.get_children():
@@ -72,6 +72,8 @@ func apply_hit(damage: int):
 			set_process(false)
 			set_physics_process(false)
 			$SFX/Defeated.play()
+			$DeathParticles.emitting = true
+			$VisualPivot.hide()
 		else:
 			$SFX/Damaged.play_sfx()
 			# hit flash
