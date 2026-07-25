@@ -5,7 +5,10 @@
 [ext_resource type="Script" uid="uid://b3nwtlpygc74r" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="2_7bfig"]
 [ext_resource type="PackedScene" uid="uid://6tnlbmcdw1b3" path="res://content/GMTK2026/Environment/Meteors/meteor.tscn" id="2_hxwgx"]
 [ext_resource type="Texture2D" uid="uid://cw7fmxi78snk7" path="res://content/GMTK2026/starfield.png" id="2_qmd8u"]
+[ext_resource type="Script" uid="uid://byxynuwh38a44" path="res://content/GMTK2026/music_controller.gd" id="2_qomxq"]
+[ext_resource type="AudioStream" uid="uid://crl7rshv02epe" path="res://content/Alkakrab_SpaceSciFiTracks/7. Galactic Gauntlet (Loop).ogg" id="2_w7hgs"]
 [ext_resource type="Resource" uid="uid://dneh0p6b1knso" path="res://content/GMTK2026/starter_wave.tres" id="3_6d6ul"]
+[ext_resource type="AudioStream" uid="uid://kvimau00c085" path="res://content/Alkakrab_SpaceSciFiTracks/16. Exoplanet Exodus (Loop).ogg" id="3_qomxq"]
 [ext_resource type="Script" uid="uid://dgrrrm5nf2bcx" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="3_yutxw"]
 [ext_resource type="Script" uid="uid://j1rl8bec286h" path="res://addons/shaker/data/Vector2/ShakerTypeRandom2D.gd" id="4_7bfig"]
 [ext_resource type="Script" uid="uid://balvcdikngibq" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="5_ir85l"]
@@ -32,6 +35,21 @@ radius = 131.00381
 process_mode = 3
 script = ExtResource("1_e2bs0")
 auto_play_in_debug_build = false
+
+[node name="MusicController" type="Node" parent="." unique_id=1321091959]
+unique_name_in_owner = true
+script = ExtResource("2_qomxq")
+crossfade_duration = 1.0
+
+[node name="MenuMusicPlayer" type="AudioStreamPlayer" parent="MusicController" unique_id=1499761237]
+stream = ExtResource("2_w7hgs")
+bus = &"Music"
+parameters/looping = true
+
+[node name="BattleMusicPlayer" type="AudioStreamPlayer" parent="MusicController" unique_id=171486363]
+stream = ExtResource("3_qomxq")
+bus = &"Music"
+parameters/looping = true
 
 [node name="World" type="Node2D" parent="." unique_id=792346425]
 unique_name_in_owner = true

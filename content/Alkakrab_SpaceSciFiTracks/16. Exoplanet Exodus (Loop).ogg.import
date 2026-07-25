@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://kvimau00c085"
+path="res://.godot/imported/16. Exoplanet Exodus (Loop).ogg-a4c364d91efaa4e8399f504daf84be26.oggvorbisstr"
+
+[deps]
+
+source_file="res://content/Alkakrab_SpaceSciFiTracks/16. Exoplanet Exodus (Loop).ogg"
+dest_files=["res://.godot/imported/16. Exoplanet Exodus (Loop).ogg-a4c364d91efaa4e8399f504daf84be26.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
