@@ -11,6 +11,9 @@ func _ready() -> void:
 		play()
 		
 	%GameOverLabel.hide() # entering gameplay, clear game over label
+	
+	if OS.has_feature("web"):
+		%QuitButton.hide()
 
 func play():
 	%StartGameArea.hide()
