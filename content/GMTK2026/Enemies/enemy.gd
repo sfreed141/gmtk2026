@@ -25,6 +25,9 @@ const _BAR_SIZE_PER_HP = 32
 var _max_hp
 var _attacking = false
 
+func _defeated():
+	return hp <= 0
+
 func _ready():
 	_max_hp = hp
 	_hp_bar.max_value = hp
@@ -37,7 +40,12 @@ func apply_hit(damage: int):
 	hp -= damage
 	_shaker_component.play_shake()
 	if hp <= 0:
+		$SFX/Defeated.play()
+		hide()
+		await $SFX/Defeated.finished
 		queue_free()
+	else:
+		$SFX/Damaged.play_sfx()
 
 func _get_split_instance() -> RigidBody2D:
 	if splits_into:
@@ -47,7 +55,10 @@ func _get_split_instance() -> RigidBody2D:
 		instance.hp = _max_hp
 		return instance
 
-func split():	
+func split():
+	if _defeated():
+		return
+	
 	for i in split_count:
 		var instance: RigidBody2D = _get_split_instance()
 		instance.position = global_position
@@ -70,6 +81,9 @@ func _process(_delta: float) -> void:
 	_hp_bar.value = hp
 
 func _physics_process(_delta: float) -> void:
+	if _defeated():
+		return
+	
 	var to_chase_target = _chase_target.global_position - global_position
 	var f = to_chase_target.normalized() * speed * (0.5 if _attacking else 1.0)
 	apply_central_force(f)
@@ -99,6 +113,7 @@ func _attack():
 	t.parallel().tween_property(_attack_sprite, "scale", initial_sprite_scale * 1.1, attack_impact_time)
 	t.tween_callback(func ():
 		_shaker_component.play_shake()
+		$SFX/AttackHit.play()
 		var bodies = _attack_area.get_overlapping_bodies()
 		for b: Node2D in bodies:
 			if b.is_in_group("player"):

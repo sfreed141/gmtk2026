@@ -25,7 +25,7 @@ signal hit()
 var _look_direction := Vector2.RIGHT
 var _charge_tween: Tween
 var _boost_tween: Tween
-var _charge_start_time_ms: int
+var _charge_start_time_ms: int = -1
 const _CHARGE_MODULATE := Color(5.0, 5.0, 5.0)
 var _hit_bodies: Dictionary
 var _last_hit_time_ms: int
@@ -52,6 +52,11 @@ func reset():
 
 	set_process(true)
 	set_physics_process(true)
+	
+	_charge_start_time_ms = -1
+	
+	for sfx in $SFX.get_children():
+		sfx.stop()
 
 func apply_hit(damage: int):
 	var hit_time_ms = Time.get_ticks_msec()
@@ -65,7 +70,9 @@ func apply_hit(damage: int):
 			defeated.emit()
 			set_process(false)
 			set_physics_process(false)
+			$SFX/Defeated.play()
 		else:
+			$SFX/Damaged.play_sfx()
 			# hit flash
 			const _FLASH_CYCLES = 4
 			const _FLASH_COLOR = Color(10, 10, 10)
@@ -103,6 +110,9 @@ func _release_charge_ability():
 		_charge_tween = null
 	_sprite.modulate = Color.WHITE
 	
+	if _charge_start_time_ms < 0:
+		return
+
 	_boost_tween = create_tween()
 	_boost_tween.tween_property(_charge_progress_bar, "value", 0, 0.2)
 	
@@ -114,9 +124,11 @@ func _release_charge_ability():
 		_charge_progress_bar.modulate = Color.FOREST_GREEN
 		_boost_shaker.intensity = 4
 		_boost_shaker.play_shake()
+		$SFX/ChargeReleaseSuper.play()
 	else:
 		_boost_shaker.intensity = 1
 		_boost_shaker.play_shake()
+		$SFX/ChargeRelease.play()
 	
 	var boost_direction = _visual_pivot.global_transform.basis_xform(Vector2.RIGHT)
 	var boost_speed = max_speed * boost_speed_multiplier * min(charge_weight, 1)
@@ -135,7 +147,13 @@ func _physics_process(delta: float) -> void:
 		_charge_progress_bar.modulate = Color.TRANSPARENT
 		_charge_tween = _make_charge_tween()
 		_charge_start_time_ms = Time.get_ticks_msec()
+		$SFX/Charge.play()
+		await $SFX/Charge.finished
+		$SFX/ChargeSustain.play()
 	elif Input.is_action_just_released("charge"):
+		$SFX/Charge.stop()
+		$SFX/ChargeSustain.stop()
+		
 		# Charge released
 		_release_charge_ability()
 	
@@ -149,17 +167,26 @@ func _physics_process(delta: float) -> void:
 			_set_look_direction(direction)
 	else:
 		if direction:
+			if not $SFX/Moving.playing:
+				$SFX/Moving.play()
+			
 			var target_velocity := direction.normalized() * max_speed
 			velocity = velocity.move_toward(target_velocity, acceleration * delta)
 			
 			_set_look_direction(velocity)
 		else:
+			if $SFX/Moving.playing:
+				$SFX/Moving.stop()
 			_apply_deceleration(delta, deceleration_half_life)
 	
 	var impact_velocity := velocity
 	move_and_slide()
 	
-	for i in get_slide_collision_count():
+	var collision_count = get_slide_collision_count()
+	if collision_count > 0 and not $SFX/Impact.playing:
+		$SFX/Impact.play()
+	
+	for i in collision_count:
 		var collision := get_slide_collision(i)
 		var body := collision.get_collider() as RigidBody2D
 		if body:

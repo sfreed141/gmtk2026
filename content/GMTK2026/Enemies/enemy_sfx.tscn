@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://wbv4binms11i"]
+
+[ext_resource type="AudioStream" uid="uid://dnb3yr0bjfs45" path="res://content/Kenney/kenney_impact-sounds/Audio/footstep_snow_001.ogg" id="1_0o206"]
+[ext_resource type="Script" uid="uid://nos2s2mnlihl" path="res://content/GMTK2026/audio_player.gd" id="2_8g6ec"]
+[ext_resource type="AudioStream" uid="uid://c172qrehj6q5g" path="res://content/Kenney/kenney_sci-fi-sounds/Audio/explosionCrunch_000.ogg" id="3_0o206"]
+[ext_resource type="AudioStream" uid="uid://bmfrnqddplbhd" path="res://content/Kenney/kenney_sci-fi-sounds/Audio/laserSmall_000.ogg" id="4_o7dam"]
+
+[node name="SFX" type="Node" unique_id=194446341]
+
+[node name="Damaged" type="AudioStreamPlayer2D" parent="." unique_id=1704081634]
+stream = ExtResource("1_0o206")
+bus = &"SFX"
+script = ExtResource("2_8g6ec")
+
+[node name="Defeated" type="AudioStreamPlayer2D" parent="." unique_id=1225305413]
+stream = ExtResource("3_0o206")
+bus = &"SFX"
+
+[node name="AttackHit" type="AudioStreamPlayer2D" parent="." unique_id=19079035]
+stream = ExtResource("4_o7dam")
+bus = &"SFX"
+
+[node name="AttackCharge" type="AudioStreamPlayer2D" parent="." unique_id=251506122]
+bus = &"SFX"

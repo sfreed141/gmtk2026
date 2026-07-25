@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://j1rl8bec286h" path="res://addons/shaker/data/Vector2/ShakerTypeRandom2D.gd" id="8_phims"]
 [ext_resource type="Script" uid="uid://balvcdikngibq" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="9_oxhki"]
 [ext_resource type="Script" uid="uid://cfb8ifkrx5yrp" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="10_0l5s6"]
+[ext_resource type="PackedScene" uid="uid://wbv4binms11i" path="res://content/GMTK2026/Enemies/enemy_sfx.tscn" id="11_ycji6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2uyj2"]
 radius = 90.13878
@@ -95,3 +96,5 @@ intensity = 2.865
 duration = 0.2
 shakerPreset = SubResource("Resource_dhrd0")
 metadata/_custom_type_script = "uid://b3nwtlpygc74r"
+
+[node name="SFX" parent="." unique_id=194446341 instance=ExtResource("11_ycji6")]
