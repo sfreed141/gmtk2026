@@ -41,6 +41,7 @@ func apply_hit(damage: int):
 	if hp <= 0:
 		$SFX/Defeated.play()
 		hide()
+		$CollisionShape2D.disabled = true
 		if _attack_tween:
 			_attack_tween.kill()
 		await $SFX/Defeated.finished
