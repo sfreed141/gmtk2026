@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+signal defeated()
+
 const _MAX_SPLIT_GENERATION = 2
 
 # Leave as null to split into itself (can't assign same PackedScene as current scene because it creates a circular ref)
@@ -42,6 +44,7 @@ func _ready():
 func apply_hit(damage: int):
 	hp -= damage
 	if hp <= 0:
+		defeated.emit()
 		$SFX/Defeated.play()
 		$DeathParticles.emitting = true
 		$Sprite2D.hide()

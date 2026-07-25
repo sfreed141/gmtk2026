@@ -56,7 +56,7 @@ func _ready() -> void:
 	_split_timer.timeout.connect(_on_split_timeout)
 	
 	assert(split_node_root)
-	split_node_root.child_exiting_tree.connect(_split_node_exiting)
+	split_node_root.child_entered_tree.connect(_split_child_entered)
 
 func _process(_delta: float) -> void:
 	if not _game_active:
@@ -112,9 +112,18 @@ func _on_split_timeout():
 		s.split()
 	_split_timer.start(split_time)
 
-func _split_node_exiting(_n):
-	if _game_active and split_node_root.get_child_count() == 1:
-		_end_game(true)
+func _split_child_entered(n):
+	n.defeated.connect(_check_game_over)
+
+func _check_game_over():
+	if _game_active:
+		var all_defeated = true
+		for c in split_node_root.get_children():
+			if not c.is_defeated():
+				all_defeated = false
+				break
+		if all_defeated:
+			_end_game(true)
 
 func _end_game(won: bool):
 	game_over.emit(won)
