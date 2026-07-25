@@ -44,13 +44,13 @@ crossfade_duration = 1.0
 
 [node name="MenuMusicPlayer" type="AudioStreamPlayer" parent="MusicController" unique_id=1499761237]
 stream = ExtResource("2_w7hgs")
-volume_db = -6.0
+volume_db = -9.0
 bus = &"Music"
 parameters/looping = true
 
 [node name="BattleMusicPlayer" type="AudioStreamPlayer" parent="MusicController" unique_id=171486363]
 stream = ExtResource("3_qomxq")
-volume_db = -6.0
+volume_db = -9.0
 bus = &"Music"
 parameters/looping = true
 
@@ -303,7 +303,7 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 24
 text = "Your Mission
 
-Defeat all enemies.
+Defeat all enemies by boosting into them.
 Existing enemies split
 and reinforcements arrive periodically."
 
@@ -387,7 +387,7 @@ horizontal_alignment = 1
 [node name="RestartButton" type="Button" parent="CanvasLayer/MenuOverlay/Panel/CenterContainer/VBoxContainer" unique_id=803043815]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Restart"
+text = "Try Again"
 
 [node name="IntroLevel" type="Button" parent="CanvasLayer/MenuOverlay/Panel/CenterContainer/VBoxContainer" unique_id=1685222914]
 layout_mode = 2
