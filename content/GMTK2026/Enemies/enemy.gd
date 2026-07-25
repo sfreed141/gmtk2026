@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+const _MAX_SPLIT_GENERATION = 2
+
 # Leave as null to split into itself (can't assign same PackedScene as current scene because it creates a circular ref)
 @export var splits_into: PackedScene
 @export var split_count := 8
@@ -24,6 +26,7 @@ extends RigidBody2D
 const _BAR_SIZE_PER_HP = 32
 var _max_hp
 var _attacking = false
+var _split_generation = 1
 
 func _defeated():
 	return hp <= 0
@@ -59,12 +62,13 @@ func _get_split_instance() -> RigidBody2D:
 		return instance
 
 func split():
-	if _defeated():
+	if _defeated() or _split_generation >= _MAX_SPLIT_GENERATION:
 		return
 	
 	for i in split_count:
 		var instance: RigidBody2D = _get_split_instance()
 		instance.position = global_position
+		instance._split_generation += 1
 		add_sibling(instance)
 		
 		var instance_collision_mask = instance.collision_mask
