@@ -90,9 +90,14 @@ func apply_hit(damage: int):
 func _update_hp_ui():
 	var hp_ui_count = _hp_container.get_child_count()
 	var hp_ui_diff = hp_ui_count - hp
+	if hp_ui_diff != 0:
+		$HUD/MarginContainer/PanelContainer/MarginContainer/ControlAnimatorComponent.pulse()
 	if hp_ui_diff > 0:
 		for i in range(hp_ui_diff):
-			_hp_container.remove_child(_hp_container.get_child(0))
+			var c = _hp_container.get_child(0)
+			if not (c is Control):
+				c = _hp_container.get_child(1)
+			_hp_container.remove_child(c)
 	elif hp_ui_diff < 0:
 		var template = preload("res://content/GMTK2026/Player/player_hp_ui_chunk.tscn")
 		for i in range(abs(hp_ui_diff)):
@@ -111,13 +116,13 @@ func _release_charge_ability():
 	if _charge_tween and _charge_tween.is_valid():
 		_charge_tween.kill()
 		_charge_tween = null
-	_sprite.modulate = Color.WHITE
 	
 	if _charge_start_time_ms < 0:
 		return
 
 	_boost_tween = create_tween()
 	_boost_tween.tween_property(_charge_progress_bar, "value", 0, 0.2)
+	_boost_tween.parallel().tween_property(_sprite, "modulate", Color.WHITE, 0.5)
 	
 	var charge_duration = (Time.get_ticks_msec() - _charge_start_time_ms) / 1000.0
 	var charge_weight = charge_duration / charge_time
@@ -127,6 +132,7 @@ func _release_charge_ability():
 	if absf(charge_weight - 1.0) < BOOST_SUPER_MARGIN:
 		speed_multiplier = boost_super_speed_multiplier
 		_charge_progress_bar.modulate = Color.FOREST_GREEN
+		_sprite.modulate = Color.FOREST_GREEN * Color(5,5,5,1)
 		_boost_shaker.intensity = 4
 		_boost_shaker.play_shake()
 		$SFX/ChargeReleaseSuper.play()

@@ -12,12 +12,14 @@
 [ext_resource type="Script" uid="uid://balvcdikngibq" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="8_3fwrr"]
 [ext_resource type="Script" uid="uid://cfb8ifkrx5yrp" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="9_l3dj5"]
 [ext_resource type="PackedScene" uid="uid://oy4smx34r8j3" path="res://content/GMTK2026/Player/player_hp_ui_chunk.tscn" id="12_80x3s"]
+[ext_resource type="Script" uid="uid://d0uvvxh0vtvi4" path="res://content/GMTK2026/Components/control_animator_component.gd" id="13_hf80h"]
 [ext_resource type="AudioStream" uid="uid://wh7qfq5isx8o" path="res://content/GMTK2026/Audio/phaserUp5.ogg" id="13_n2rys"]
 [ext_resource type="AudioStream" uid="uid://d07ug0kesu6gu" path="res://content/Kenney/kenney_sci-fi-sounds/Audio/thrusterFire_000.ogg" id="13_uvnbg"]
 [ext_resource type="Script" uid="uid://nos2s2mnlihl" path="res://content/GMTK2026/audio_player.gd" id="14_6g3qu"]
 [ext_resource type="AudioStream" uid="uid://uutu0wrxmrtq" path="res://content/GMTK2026/Audio/phaserUp5loop.ogg" id="14_kvsuh"]
 [ext_resource type="AudioStream" uid="uid://dftr1plofrsl3" path="res://content/Kenney/kenney_sci-fi-sounds/Audio/laserLarge_002.ogg" id="15_uvnbg"]
 [ext_resource type="AudioStream" uid="uid://ddchk0lo0f8c0" path="res://content/Kenney/kenney_sci-fi-sounds/Audio/explosionCrunch_001.ogg" id="16_6g3qu"]
+[ext_resource type="AudioStream" uid="uid://dr831sqnbw5r0" path="res://content/Kenney/kenney_sci-fi-sounds/Audio/laserLarge_000.ogg" id="18_ko8et"]
 [ext_resource type="AudioStream" uid="uid://cop0e1tj783x4" path="res://content/Kenney/kenney_impact-sounds/Audio/impactWood_heavy_000.ogg" id="19_6g3qu"]
 [ext_resource type="Texture2D" uid="uid://ddum7r1itvicq" path="res://content/GiantLightStudios_SimpleShapes/square_64.png" id="20_sreuy"]
 
@@ -185,6 +187,11 @@ layout_mode = 2
 [node name="TextureRect5" parent="HUD/MarginContainer/PanelContainer/MarginContainer/HPContainer" unique_id=983518772 instance=ExtResource("12_80x3s")]
 layout_mode = 2
 
+[node name="ControlAnimatorComponent" type="Node" parent="HUD/MarginContainer/PanelContainer/MarginContainer" unique_id=1223065583]
+script = ExtResource("13_hf80h")
+pulse_scale = 1.1
+metadata/_custom_type_script = "uid://d0uvvxh0vtvi4"
+
 [node name="SFX" type="Node" parent="." unique_id=2103161863]
 
 [node name="Moving" type="AudioStreamPlayer2D" parent="SFX" unique_id=486708720]
@@ -208,8 +215,8 @@ stream = ExtResource("15_uvnbg")
 bus = &"SFX"
 
 [node name="ChargeReleaseSuper" type="AudioStreamPlayer2D" parent="SFX" unique_id=1072976543]
-stream = ExtResource("15_uvnbg")
-volume_db = 4.391
+stream = ExtResource("18_ko8et")
+volume_db = 6.844
 bus = &"SFX"
 
 [node name="Damaged" type="AudioStreamPlayer2D" parent="SFX" unique_id=913987085]

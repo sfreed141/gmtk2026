@@ -24,12 +24,12 @@ script = ExtResource("1_xgowh")
 
 [node name="Countdown" type="AudioStreamPlayer" parent="SFX" unique_id=1174392373]
 stream = ExtResource("2_rjds7")
-volume_db = -6.0
+volume_db = -9.0
 bus = &"SFX"
 
 [node name="CountdownFinal" type="AudioStreamPlayer" parent="SFX" unique_id=1094269211]
 stream = ExtResource("3_d1gl2")
-volume_db = -6.0
+volume_db = -9.0
 bus = &"SFX"
 
 [node name="WaveTimer" type="Timer" parent="." unique_id=1721995503]
