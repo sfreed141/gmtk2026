@@ -78,13 +78,15 @@ func apply_hit(damage: int):
 			$SFX/Damaged.play_sfx()
 			# hit flash
 			const _FLASH_CYCLES = 4
-			const _FLASH_COLOR = Color(10, 10, 10)
+			const _FLASH_COLOR = Color(10, 1, 1)
 			var flash_half_period = hit_invulnerability_duration / _FLASH_CYCLES
 			var t = create_tween()
 			t.set_loops(2)
 			t.tween_property(_sprite, "modulate", _FLASH_COLOR, 0)
+			t.tween_property(_hp_container, "modulate", _FLASH_COLOR, 0)
 			t.tween_interval(flash_half_period)
 			t.tween_property(_sprite, "modulate", Color.WHITE, 0)
+			t.tween_property(_hp_container, "modulate", Color.WHITE, 0)
 			t.tween_interval(flash_half_period)
 
 func _update_hp_ui():
