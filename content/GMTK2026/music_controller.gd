@@ -8,6 +8,9 @@ const VOLUME_SILENT_DB := -100.
 @onready var _menu_player: AudioStreamPlayer = $MenuMusicPlayer
 @onready var _battle_player: AudioStreamPlayer = $BattleMusicPlayer
 
+var _menu_player_base_volume_db: float
+var _battle_player_base_volume_db: float
+
 func set_volume_db(volume_db: float, fade_duration: float = crossfade_duration):
 	var bus_idx = AudioServer.get_bus_index("Music")
 	assert(bus_idx > 0)
@@ -20,10 +23,10 @@ func set_volume_db(volume_db: float, fade_duration: float = crossfade_duration):
 	t.tween_method(volume_fn, current_volume_db, volume_db, fade_duration)
 
 func play_menu(fade_duration: float = crossfade_duration):
-	_play_or_fade(_battle_player, _menu_player, fade_duration)
+	_play_or_fade(_battle_player, _menu_player, _menu_player_base_volume_db, fade_duration)
 
 func play_battle(fade_duration: float = crossfade_duration):
-	_play_or_fade(_menu_player, _battle_player, fade_duration)
+	_play_or_fade(_menu_player, _battle_player, _battle_player_base_volume_db, fade_duration)
 
 func stop():
 	_menu_player.stop()
@@ -31,22 +34,24 @@ func stop():
 
 func _ready():
 	stop()
+	_menu_player_base_volume_db = _menu_player.volume_db
+	_battle_player_base_volume_db = _battle_player.volume_db
 
-func _play_or_fade(from_stream: AudioStreamPlayer, to_stream: AudioStreamPlayer, fade_duration: float):
+func _play_or_fade(from_stream: AudioStreamPlayer, to_stream: AudioStreamPlayer, target_db: float, fade_duration: float):
 	if (from_stream.playing):
-		_crossfade(from_stream, to_stream, fade_duration)
+		_crossfade(from_stream, to_stream, target_db, fade_duration)
 	else:
-		_fade_in(to_stream, fade_duration)
+		_fade_in(to_stream, target_db, fade_duration)
 
-func _fade_in(stream: AudioStreamPlayer, duration: float):
+func _fade_in(stream: AudioStreamPlayer, target_db: float, duration: float):
 	stream.stop()
 	stream.volume_db = VOLUME_SILENT_DB
 	stream.play()
 	
 	var t = create_tween()
-	t.tween_property(stream, "volume_db", 0, duration)
+	t.tween_property(stream, "volume_db", target_db, duration)
 
-func _crossfade(from_stream: AudioStreamPlayer, to_stream: AudioStreamPlayer, duration: float):
+func _crossfade(from_stream: AudioStreamPlayer, to_stream: AudioStreamPlayer, target_db: float, duration: float):
 	assert(from_stream.playing)
 	assert(not to_stream.playing)
 	
@@ -55,7 +60,7 @@ func _crossfade(from_stream: AudioStreamPlayer, to_stream: AudioStreamPlayer, du
 	
 	var t = create_tween().set_parallel(true)
 	t.tween_property(from_stream, "volume_db", VOLUME_SILENT_DB, duration)
-	t.tween_property(to_stream, "volume_db", 0, duration)
+	t.tween_property(to_stream, "volume_db", target_db, duration)
 	
 	await t.finished
 	from_stream.stop()

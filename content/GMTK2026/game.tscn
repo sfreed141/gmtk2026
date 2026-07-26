@@ -46,13 +46,13 @@ crossfade_duration = 1.0
 
 [node name="MenuMusicPlayer" type="AudioStreamPlayer" parent="MusicController" unique_id=1499761237]
 stream = ExtResource("2_w7hgs")
-volume_db = -9.0
+volume_db = -6.0
 bus = &"Music"
 parameters/looping = true
 
 [node name="BattleMusicPlayer" type="AudioStreamPlayer" parent="MusicController" unique_id=171486363]
 stream = ExtResource("3_qomxq")
-volume_db = -9.0
+volume_db = -6.0
 bus = &"Music"
 parameters/looping = true
 
@@ -348,12 +348,12 @@ bus_name = "SFX"
 
 [node name="Countdown" type="AudioStreamPlayer" parent="World/StartGameArea/SFX" unique_id=1189849059]
 stream = ExtResource("20_j2udq")
-volume_db = -6.0
+volume_db = -9.0
 bus = &"SFX"
 
 [node name="CountdownFinal" type="AudioStreamPlayer" parent="World/StartGameArea/SFX" unique_id=749940239]
 stream = ExtResource("21_llg4c")
-volume_db = -6.0
+volume_db = -9.0
 bus = &"SFX"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1570526261]
